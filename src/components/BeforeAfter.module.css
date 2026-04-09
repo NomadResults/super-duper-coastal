@@ -1,0 +1,194 @@
+.section {
+    background-color: var(--navy);
+    padding: 7rem 0 6rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+
+.eyebrow {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 1rem;
+}
+
+.heading {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 400;
+    font-style: italic;
+    color: #ffffff;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.85rem;
+}
+
+.sub {
+    font-size: 0.82rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: rgba(232, 237, 243, 0.55);
+}
+
+/* ── Slider ── */
+.sliderWrap {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    max-width: 1100px;
+    margin: 0 auto;
+    overflow: hidden;
+    cursor: ew-resize;
+    user-select: none;
+    -webkit-user-select: none;
+    box-shadow: 0 0 0 1px rgba(196, 168, 96, 0.2), 0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+.imgAfter,
+.imgBefore {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+}
+
+.imgAfter {
+    z-index: 1;
+}
+
+.imgBefore {
+    z-index: 2;
+}
+
+/* ── Labels ── */
+.label {
+    position: absolute;
+    top: 1.25rem;
+    z-index: 4;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    font-variant: small-caps;
+    letter-spacing: 0.18em;
+    color: var(--accent-bright);
+    background: rgba(18, 40, 64, 0.72);
+    padding: 0.35rem 0.85rem;
+    pointer-events: none;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.labelBefore {
+    left: 1.25rem;
+}
+
+.labelAfter {
+    right: 1.25rem;
+}
+
+/* ── Divider ── */
+.divider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--accent-bright);
+    z-index: 5;
+    transform: translateX(-50%);
+    cursor: ew-resize;
+    touch-action: none;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1px;
+    background: rgba(196, 168, 96, 0.3);
+}
+
+/* ── Handle ── */
+.handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid var(--accent-bright);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navy);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), 0 0 0 4px rgba(196, 168, 96, 0.15);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    cursor: ew-resize;
+}
+
+.handle:hover {
+    box-shadow: 0 4px 28px rgba(196, 168, 96, 0.4), 0 0 0 6px rgba(196, 168, 96, 0.18);
+    transform: translate(-50%, -50%) scale(1.08);
+}
+
+/* ── Footer CTA ── */
+.footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2.5rem;
+    text-align: center;
+}
+
+.footerNote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(232, 237, 243, 0.6);
+    max-width: 52ch;
+    line-height: 1.6;
+}
+
+.footerCta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background-color: var(--accent-bright);
+    padding: 0.75rem 1.75rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.footerCta:hover {
+    background-color: #ffffff;
+    color: var(--navy);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .section { padding: 5rem 0 4.5rem; }
+    .sliderWrap { aspect-ratio: 4 / 3; }
+    .label { font-size: 0.68rem; padding: 0.25rem 0.65rem; top: 0.75rem; }
+    .labelBefore { left: 0.75rem; }
+    .labelAfter { right: 0.75rem; }
+    .handle { width: 40px; height: 40px; }
+}

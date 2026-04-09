@@ -1,0 +1,168 @@
+/* Tall scroll container — gives scroll room */
+.section {
+    position: relative;
+    height: 120vh;
+}
+
+/* Sticky viewport — pins the visual while scroll travels through .section */
+.sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Full-bleed video fills the sticky frame */
+.video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    will-change: contents;
+    transform: translateZ(0);
+}
+
+/* Radial vignette — darkens outer edges, keeps center open */
+.vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse 75% 65% at 50% 48%,
+        transparent 35%,
+        rgba(14, 12, 10, 0.62) 100%
+    );
+    pointer-events: none;
+}
+
+/* Top fade — blends seamlessly from white Hero above */
+.vignetteTop {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        #ffffff 0%,
+        rgba(255, 255, 255, 0.5) 14%,
+        transparent 36%
+    );
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Bottom fade dissolves into white sections below */
+.vignetteBottom {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to top,
+        #ffffff 0%,
+        rgba(255, 255, 255, 0.55) 20%,
+        transparent 46%
+    );
+    pointer-events: none;
+}
+
+/* All panels are absolutely stacked in center — opacity controls which shows */
+.overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 8vw;
+    pointer-events: none;
+}
+
+.panel {
+    position: absolute;
+    left: 8vw;
+    max-width: 480px;
+    background: linear-gradient(
+        105deg,
+        rgba(8, 6, 4, 0.72) 0%,
+        rgba(8, 6, 4, 0.48) 70%,
+        transparent 100%
+    );
+    border-left: 2px solid var(--accent-bright);
+    padding: 2.25rem 3rem 2.25rem 2rem;
+}
+
+.roman {
+    display: block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 1rem;
+}
+
+.rule {
+    width: 3rem;
+    height: 1px;
+    background-color: var(--accent-bright);
+    margin-bottom: 1.75rem;
+}
+
+.panelHeadline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.05;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
+}
+
+.panelBody {
+    font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.8;
+    max-width: 42ch;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Gold progress bar along the bottom */
+.progressBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--accent-bright);
+    z-index: 20;
+}
+
+/* ── Mobile static layout ────────────────────────────────── */
+.mobileSectionWrapper {
+    position: relative;
+    overflow: hidden;
+    padding: 5rem 0;
+}
+
+.mobileBg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1a3558 0%, #0f2235 100%);
+}
+
+.mobilePanels {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0 1.25rem;
+}
+
+/* On mobile, panels are stacked (not absolute) */
+.mobilePanels .panel {
+    position: relative;
+    left: auto;
+    max-width: 100%;
+}

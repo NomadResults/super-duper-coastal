@@ -1,0 +1,307 @@
+/* ── Gold rule ── */
+.goldRule {
+    height: 2px;
+    background: linear-gradient(to right, var(--accent-bright), transparent);
+}
+
+/* ── Section header ── */
+.sectionHeader {
+    background-color: var(--bg);
+    padding: 5rem 0 0;
+}
+
+.headerInner {
+    max-width: 780px;
+}
+
+.eyebrow {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 1.25rem;
+}
+
+.sectionHeadline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+}
+
+.sectionHeadline em {
+    font-style: italic;
+    color: var(--accent);
+}
+
+.sectionBody {
+    font-size: clamp(0.92rem, 1.4vw, 1.04rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    max-width: 60ch;
+}
+
+/* ── Services section ── */
+.servicesSection {
+    background-color: var(--bg);
+    padding: 3.5rem 0 6rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background-color: var(--border);
+}
+
+/* Fifth card spans full width */
+.grid > *:last-child {
+    grid-column: 1 / -1;
+}
+
+/* ── Card ── */
+.card {
+    background-color: var(--bg);
+    transition: background-color 0.25s ease;
+}
+
+.card:hover {
+    background-color: var(--bg-secondary);
+}
+
+.cardLink {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    height: 100%;
+}
+
+.cardImgWrap {
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.cardImg {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+/* Featured last card gets a wider photo */
+.grid > *:last-child .cardImg {
+    aspect-ratio: 21 / 9;
+}
+
+.card:hover .cardImg {
+    transform: scale(1.04);
+}
+
+.cardImgOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(18, 40, 64, 0.55) 100%);
+    pointer-events: none;
+}
+
+.cardNum {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.5rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--accent-bright);
+    text-transform: uppercase;
+    background-color: rgba(18, 40, 64, 0.65);
+    padding: 0.3rem 0.65rem;
+    backdrop-filter: blur(4px);
+}
+
+.cardBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    padding: 2rem 2.25rem 2.25rem;
+    gap: 1.5rem;
+    border: 1px solid var(--border);
+    border-top: none;
+}
+
+.cardText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.cardTagline {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.cardTitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.cardDesc {
+    font-size: clamp(0.88rem, 1.2vw, 0.95rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 56ch;
+}
+
+/* Wide last-card layout */
+.grid > *:last-child .cardBody {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 4rem;
+}
+
+.grid > *:last-child .cardText {
+    flex: 1;
+}
+
+.cardCta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background-color: var(--accent-bright);
+    padding: 0.85rem 1.75rem;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+}
+
+.cardLink:hover .cardCta {
+    background-color: var(--navy);
+    color: var(--accent-bright);
+}
+
+/* ── CTA band ── */
+.ctaBand {
+    background-color: var(--navy);
+    padding: 6rem 0;
+}
+
+.ctaInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.ctaEyebrow {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 0.75rem;
+}
+
+.ctaHeadline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 300;
+    font-style: normal;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+.ctaHeadline em {
+    font-style: italic;
+    color: var(--accent-bright);
+}
+
+.ctaBtn {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background-color: var(--accent-bright);
+    border: none;
+    padding: 1.1rem 2.75rem;
+    text-decoration: none;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.ctaBtn:hover {
+    background-color: #ffffff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .grid > *:last-child {
+        grid-column: auto;
+    }
+
+    .grid > *:last-child .cardBody {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    .grid > *:last-child .cardImg {
+        aspect-ratio: 16 / 9;
+    }
+
+    .sectionHeader {
+        padding: 3.5rem 0 0;
+    }
+
+    .servicesSection {
+        padding: 2.5rem 0 4rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .ctaInner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .ctaBand {
+        padding: 4rem 0;
+    }
+
+    .cardBody {
+        padding: 1.5rem 1.25rem 1.75rem;
+    }
+}

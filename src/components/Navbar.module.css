@@ -1,0 +1,425 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.header.scrolled {
+    background-color: rgba(18, 40, 64, 0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom-color: rgba(196, 168, 96, 0.2);
+    box-shadow: 0 2px 24px rgba(18, 40, 64, 0.25);
+}
+
+/* When scrolled, flip text to white/gold */
+.header.scrolled .logoLine1,
+.header.scrolled .logoLine2,
+.header.scrolled .logoDivider {
+    color: var(--accent-bright);
+}
+.header.scrolled .logoIcon {
+    color: var(--accent-bright);
+}
+.header.scrolled .navLink {
+    color: rgba(232, 237, 243, 0.75);
+}
+.header.scrolled .navLink:hover {
+    color: var(--accent-bright);
+}
+.header.scrolled .ctaBtn {
+    color: var(--accent-bright);
+    border-color: var(--accent-bright);
+}
+.header.scrolled .ctaBtn:hover {
+    background-color: var(--accent-bright);
+    color: var(--navy);
+}
+.header.scrolled .menuBtn {
+    color: var(--accent-bright);
+}
+
+.inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.logoIcon {
+    width: 32px;
+    height: 26px;
+    color: #ffffff;
+    flex-shrink: 0;
+    transition: color 0.3s ease;
+}
+
+.logoIcon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.logoDivider {
+    width: 1px;
+    height: 30px;
+    background-color: var(--accent-bright);
+    flex-shrink: 0;
+    transition: color 0.3s ease;
+}
+
+.logoTextBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+}
+
+.logoLine1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    line-height: 1.15;
+    transition: color 0.3s ease;
+}
+
+.logoLine2 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.72rem;
+    font-weight: 400;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    color: var(--accent-bright);
+    line-height: 1.15;
+    transition: color 0.3s ease;
+}
+
+/* Desktop nav */
+.desktopNav {
+    display: none;
+    align-items: center;
+    gap: 2.25rem;
+}
+
+/* Dropdown */
+.dropdownWrap {
+    position: relative;
+}
+
+.navLinkBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: inherit;
+    padding: 0;
+}
+
+.chevron {
+    transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+    transform: rotate(180deg);
+}
+
+.dropdown {
+    position: absolute;
+    top: calc(100% + 1rem);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 230px;
+    background-color: #ffffff;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    z-index: 200;
+}
+
+.dropdownDark {
+    background-color: var(--navy);
+    border-color: rgba(196, 168, 96, 0.2);
+}
+
+.dropdownItem {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.9rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.dropdownItem:last-child {
+    border-bottom: none;
+}
+
+.dropdownItem:hover {
+    background-color: var(--navy);
+    color: var(--accent-bright);
+}
+
+.dropdownAllServices {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    background-color: var(--bg-secondary, #f8f6f0);
+}
+
+.dropdownAllServices:hover {
+    background-color: var(--accent-bright);
+    color: var(--navy);
+}
+
+.dropdownDark .dropdownAllServices {
+    background-color: rgba(196, 168, 96, 0.08);
+    color: var(--accent-bright);
+}
+
+.dropdownDark .dropdownAllServices:hover {
+    background-color: var(--accent-bright);
+    color: var(--navy);
+}
+
+.dropdownDivider {
+    height: 1px;
+    background-color: var(--border);
+    flex-shrink: 0;
+}
+
+.dropdownDark .dropdownDivider {
+    background-color: rgba(196, 168, 96, 0.18);
+}
+
+.dropdownDark .dropdownItem {
+    color: rgba(232, 237, 243, 0.8);
+    border-bottom-color: rgba(196, 168, 96, 0.12);
+}
+
+.dropdownDark .dropdownItem:hover {
+    background-color: rgba(196, 168, 96, 0.1);
+    color: var(--accent-bright);
+}
+
+/* Mobile submenu */
+.mobileLinkBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobileSubmenu {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent-bright);
+    margin-left: 0.25rem;
+}
+
+.mobileSubLink {
+    font-size: 0.78rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    transition: color 0.2s ease;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.mobileSubLink:hover {
+    color: var(--navy);
+}
+
+.mobileSubLinkAll {
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.15rem;
+}
+
+.navLink {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.88);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.navLink:hover {
+    color: var(--accent-bright);
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.phoneLink {
+    display: none;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    font-variant: small-caps;
+    color: var(--accent-bright);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+}
+
+.phoneLink:hover { opacity: 0.75; }
+
+.ctaBtn {
+    display: none;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    padding: 0.55rem 1.1rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.ctaBtn:hover {
+    background-color: var(--accent-bright);
+    border-color: var(--accent-bright);
+    color: var(--navy);
+}
+
+.menuBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: #ffffff;
+    transition: opacity 0.2s ease;
+}
+
+.menuBtn:hover {
+    opacity: 0.6;
+}
+
+/* Mobile menu */
+.mobileMenu {
+    overflow: hidden;
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+}
+
+.mobileLinks {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 2rem 2rem;
+    gap: 1.25rem;
+}
+
+.mobileLink {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.mobileLink:hover {
+    color: var(--text-primary);
+}
+
+.mobileCta {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    border: 1px solid var(--text-primary);
+    padding: 0.65rem 1.4rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    width: fit-content;
+    margin-top: 0.5rem;
+}
+
+.mobileCta:hover {
+    background-color: var(--text-primary);
+    color: #fff;
+}
+
+/* Tap targets — all interactive elements min 44px */
+.navLink, .mobileLink {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.mobileLink {
+    display: flex;
+    padding: 0.25rem 0;
+}
+
+/* Safe area for notch phones */
+.header {
+    padding-top: env(safe-area-inset-top);
+}
+
+.mobileMenu {
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+@media (min-width: 768px) {
+    .desktopNav { display: flex; }
+    .phoneLink { display: inline-flex; align-items: center; }
+    .ctaBtn { display: inline-flex; align-items: center; }
+    .menuBtn { display: none; }
+}
+
+@media (max-width: 380px) {
+    .inner { height: 64px; }
+    .logoText { font-size: 0.95rem; }
+}

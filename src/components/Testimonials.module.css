@@ -1,0 +1,288 @@
+.section {
+    background-color: var(--navy-light);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+}
+
+.slideWrap {
+    overflow: hidden;
+}
+
+/* Animated slide wrapper — also serves as the grid */
+.inner {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 3.5rem;
+    align-items: start;
+}
+
+/* Quote column */
+.quoteCol {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+}
+
+.quoteIcon {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--accent-bright);
+    line-height: 0.65;
+    margin-bottom: 1rem;
+}
+
+.stars {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.quote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.15rem, 1.9vw, 1.75rem);
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1.5;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+}
+
+.project {
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+/* Image column — flex column so stat box sits below image */
+.imageCol {
+    display: flex;
+    flex-direction: column;
+}
+
+.imgWrap {
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    filter: grayscale(100%);
+    transition: filter 0.6s ease;
+    cursor: default;
+    flex-shrink: 0;
+}
+
+.imgWrap:hover {
+    filter: grayscale(0%);
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.imgWrap:hover .img {
+    transform: scale(1.03);
+}
+
+/* Stat box — in normal flow below the image */
+.statBox {
+    align-self: flex-start;
+    margin-top: -1px;
+    padding: 1.25rem 1.75rem;
+    background-color: var(--bg);
+    border: 1px solid var(--border-gold);
+}
+
+.statNum {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.statLabel {
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-top: 0.35rem;
+}
+
+/* Carousel controls row */
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.25rem;
+    padding-bottom: 0.75rem;
+}
+
+.counter {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.dots {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--border);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.25s, transform 0.25s;
+}
+
+.dotActive {
+    background-color: var(--accent);
+    transform: scale(1.4);
+}
+
+.arrows {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.arrowBtn {
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.arrowBtn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Google footer row */
+.googleFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.25rem;
+    padding-bottom: 0.25rem;
+    border-top: 1px solid var(--border);
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.googleRating {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.googleLogo {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.ratingNum {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.ratingCount {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+}
+
+.googleLink {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.googleLink:hover {
+    opacity: 0.75;
+}
+
+.leaveReview {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.65rem 1.4rem;
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+}
+
+.leaveReview:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .imgWrap {
+        height: 280px;
+    }
+    .statBox {
+        align-self: flex-start;
+    }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+    .section { padding-top: 3rem; padding-bottom: 2rem; }
+    .quoteIcon { font-size: 3rem; }
+    .quote { font-size: clamp(1.1rem, 4.5vw, 1.4rem); margin-bottom: 1.25rem; }
+    .imgWrap { height: 220px; }
+    .statBox { padding: 0.9rem 1.25rem; }
+    .statNum { font-size: 2.25rem; }
+    .googleFooter { flex-direction: column; align-items: flex-start; }
+}

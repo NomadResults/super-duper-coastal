@@ -1,0 +1,179 @@
+.section {
+    background-color: var(--bg);
+}
+
+/* ── Section header: title left, label right-bottom, border-bottom ── */
+.sectionHeader {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2rem;
+    margin-bottom: 4rem;
+}
+
+.sectionTitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--text-primary);
+}
+
+.sectionLabel {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+}
+
+/* ── Service rows ── */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.row.reversed {
+    direction: rtl;
+}
+
+.row.reversed > * {
+    direction: ltr;
+}
+
+/* ── Image ── */
+.imgWrap {
+    position: relative;
+    aspect-ratio: 3/2;
+    overflow: visible;
+    background-color: var(--bg-secondary);
+}
+
+.imgWrap::after {
+    content: '';
+    position: absolute;
+    width: 10rem;
+    height: 1px;
+    background-color: var(--accent-bright);
+}
+
+.accentBottomRight::after {
+    bottom: -2.5rem;
+    right: -2.5rem;
+}
+
+.accentTopLeft::after {
+    top: -2.5rem;
+    left: -2.5rem;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%);
+    transition: filter 0.65s ease, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.imgWrap:hover .img {
+    filter: grayscale(0%);
+    transform: scale(1.03);
+}
+
+/* ── Copy ── */
+.copy {
+    display: flex;
+    flex-direction: column;
+}
+
+.ghostNum {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 7rem;
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: -0.04em;
+    color: rgba(14, 12, 10, 0.055);
+    margin-bottom: -1.25rem;
+    display: block;
+}
+
+.title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+}
+
+.desc {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.82;
+    max-width: 52ch;
+    margin-bottom: 2rem;
+}
+
+.link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    width: fit-content;
+    transition: gap 0.2s ease;
+}
+
+.link:hover {
+    gap: 1rem;
+}
+
+.linkArrow {
+    transition: transform 0.2s ease;
+}
+
+.link:hover .linkArrow {
+    transform: translateX(3px);
+}
+
+@media (max-width: 900px) {
+    .row {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+    .row.reversed { direction: ltr; }
+    .imgWrap::after { display: none; }
+    .list { gap: 3rem; }
+    .sectionHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-bottom: 3rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .list { gap: 2.5rem; }
+    .sectionHeader { margin-bottom: 2rem; padding-bottom: 1.25rem; }
+    .ghostNum { font-size: 4.5rem; }
+    .title { font-size: clamp(1.75rem, 7vw, 2.5rem); }
+    .imgWrap { aspect-ratio: 16/9; }
+    .desc { font-size: 0.9rem; }
+}

@@ -1,0 +1,203 @@
+.hero {
+    position: relative;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Full-bleed background */
+.bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.bgVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(14, 12, 10, 0.38);
+}
+
+/* Inward vignette: dark edges fade toward transparent center */
+.vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        ellipse 80% 70% at 50% 50%,
+        transparent 40%,
+        rgba(14, 12, 10, 0.55) 100%
+    );
+}
+
+/* Gradient fades to white at the bottom so hero flows into sections below */
+.gradientBottom {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #ffffff 0%, rgba(255,255,255,0.6) 20%, transparent 42%);
+}
+
+/* Top gradient darkens behind the navbar for contrast */
+.gradientTop {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(14, 12, 10, 0.62) 0%, rgba(14, 12, 10, 0.18) 22%, transparent 44%);
+}
+
+/* Centered text block */
+.center {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 1.5rem;
+    max-width: 860px;
+}
+
+.badge {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 1.25rem;
+}
+
+.headline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(3.75rem, 9vw, 7.5rem);
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.0;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+}
+
+.headlineBold {
+    font-style: normal;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.subtext {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1rem, 1.8vw, 1.35rem);
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.6;
+    max-width: 46ch;
+    margin: 0 auto 2rem;
+    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.55);
+    letter-spacing: 0.01em;
+}
+
+.ctaRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.ctaBtn {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 1px solid var(--accent-bright);
+    padding: 1rem 2.75rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.ctaBtn:hover {
+    background-color: var(--accent-bright);
+    color: #0e0c0a;
+}
+
+.ctaBtnGhost {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    padding: 1rem 2.75rem;
+    text-decoration: none;
+    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.ctaBtnGhost:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.reviewBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.reviewStars {
+    font-size: 0.78rem;
+    color: var(--accent-bright);
+    letter-spacing: 0.06em;
+}
+
+.reviewText {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Bottom-left: gold ruled line + "Est. 2009" */
+.bottomLeft {
+    position: absolute;
+    bottom: 3rem;
+    left: 3rem;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.goldLine {
+    width: 6rem;
+    height: 1px;
+    background-color: var(--accent-bright);
+}
+
+.estText {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+}
+
+@media (max-width: 640px) {
+    .headline { font-size: clamp(3rem, 15vw, 5rem); }
+    .bottomLeft { bottom: 2rem; left: 1.5rem; }
+    .subtext { font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .badge { margin-bottom: 0.75rem; }
+}

@@ -1,0 +1,189 @@
+/* ── Story ── */
+.storySection { background-color: var(--bg); }
+
+.storyGrid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 6rem;
+    align-items: start;
+}
+
+.storyCopy {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.eyebrow {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 1.25rem;
+}
+
+.storyHeadline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 2rem;
+}
+
+.para {
+    font-size: clamp(1rem, 1.6vw, 1.12rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+}
+
+.pullQuote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-primary);
+    border-left: 2px solid var(--accent-bright);
+    padding-left: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background-color: var(--accent-bright);
+    padding: 1rem 2.25rem;
+    text-decoration: none;
+    width: fit-content;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.cta:hover {
+    background-color: var(--navy);
+    color: var(--accent-bright);
+}
+
+.storyImage {
+    position: sticky;
+    top: 100px;
+}
+
+.img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+}
+
+.imgGlow {
+    position: absolute;
+    inset: 0;
+    box-shadow: 0 0 0 1px rgba(196, 168, 96, 0.2), 0 16px 48px rgba(18, 40, 64, 0.2);
+    pointer-events: none;
+}
+
+/* ── Values ── */
+.valuesSection { background-color: var(--navy); }
+
+.valuesHeader {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.valuesEyebrow {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 1rem;
+}
+
+.valuesHeading {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 300;
+    font-style: italic;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.valuesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.valueCard {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(196, 168, 96, 0.15);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.valueCard:hover {
+    background: rgba(196, 168, 96, 0.06);
+    border-color: rgba(196, 168, 96, 0.35);
+}
+
+.valueIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(196, 168, 96, 0.12);
+    border: 1px solid rgba(196, 168, 96, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-bright);
+    margin: 0 auto 1.25rem;
+}
+
+.valueStat {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--accent-bright);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.valueLabel {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 0.35rem;
+}
+
+.valueSub {
+    font-size: 0.75rem;
+    font-weight: 300;
+    color: rgba(232, 237, 243, 0.5);
+    letter-spacing: 0.04em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .storyGrid { grid-template-columns: 1fr; gap: 3rem; }
+    .storyImage { position: static; }
+    .valuesGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+    .valuesGrid { grid-template-columns: 1fr; gap: 1rem; }
+    .valueCard { padding: 2rem 1.5rem; }
+}
