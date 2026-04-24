@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).end();
 
-    const { name, phone, email, projectType, message } = req.body;
+    const { name, phone, email, projectType, budget, message } = req.body;
 
     const nameParts = (name || '').trim().split(' ');
     const firstName = nameParts[0] || '';
@@ -40,7 +40,7 @@ export default async function handler(req, res) {
                 'Content-Type': 'application/json',
                 'Version': '2021-07-28',
             },
-            body: JSON.stringify({ body: `Service: ${projectType}\n\n${message}` }),
+            body: JSON.stringify({ body: `Service: ${projectType}\nBudget: ${budget}\n\n${message}` }),
         });
     }
 
