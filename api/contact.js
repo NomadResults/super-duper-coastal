@@ -25,15 +25,23 @@ export default async function handler(req, res) {
         }),
     });
 
+    let contactId;
+
     if (!contactRes.ok) {
-        const detail = await contactRes.text();
-        return res.status(502).json({ error: 'GHL API error', detail });
+        const errData = await contactRes.json().catch(() => null);
+        // Duplicate contact — reuse the existing one
+        if (errData?.statusCode === 400 && errData?.meta?.contactId) {
+            contactId = errData.meta.contactId;
+        } else {
+            return res.status(502).json({ error: 'GHL API error', detail: JSON.stringify(errData) });
+        }
+    } else {
+        const { contact } = await contactRes.json();
+        contactId = contact?.id;
     }
 
-    const { contact } = await contactRes.json();
-
-    if (message && contact?.id) {
-        await fetch(`https://services.leadconnectorhq.com/contacts/${contact.id}/notes`, {
+    if (contactId) {
+        await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/notes`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${process.env.GHL_API_KEY}`,
