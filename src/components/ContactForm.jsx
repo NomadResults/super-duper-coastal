@@ -4,35 +4,51 @@ import { Send, CheckCircle } from 'lucide-react';
 import styles from './ContactForm.module.css';
 
 const PROJECT_TYPES = [
-    'Stone Patio & Hardscaping',
-    'Outdoor Kitchen',
-    'Outdoor Lighting',
-    'Landscaping',
-    'Artificial Turf',
-    'Full Property Design-Build',
+    'Residential Fencing',
+    'Commercial Fencing',
+    'Automatic Gates',
+    'Agricultural Fencing',
+    'Access Control System',
+    'Fence Staining & Sealing',
+    'Fence Repair',
     'Other',
 ];
 
 export default function ContactForm() {
     const [form, setForm] = useState({
-        name: '', email: '', phone: '', projectType: '', budget: '', message: '',
+        name: '', email: '', phone: '', projectType: '', message: '',
     });
     const [submitting, setSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState(false);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitting(true);
-        setTimeout(() => { setSubmitting(false); setSuccess(true); }, 1400);
+        setSubmitError(false);
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(form),
+            });
+            if (!res.ok) throw new Error('Failed');
+            setSuccess(true);
+        } catch {
+            setSubmitError(true);
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     const reset = () => {
         setSuccess(false);
-        setForm({ name: '', email: '', phone: '', projectType: '', budget: '', message: '' });
+        setSubmitError(false);
+        setForm({ name: '', email: '', phone: '', projectType: '', message: '' });
     };
 
     return (
@@ -45,14 +61,15 @@ export default function ContactForm() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-80px' }}
-                    transition={{ type: 'spring', stiffness: 80, damping: 20 }}
+                    transition={{ type: 'spring', stiffness: 100, damping: 20 }}
                 >
-                    <span className={styles.sectionLabel}>Start a Project</span>
+                    <span className={styles.sectionLabel}>Free Estimate</span>
                     <h2 className={styles.sectionTitle}>
-                        Ready to transform<br />your <em>outdoor space?</em>
+                        Ready to secure your<br /><em>property?</em>
                     </h2>
                     <p className={styles.sectionSubtext}>
-                        Currently booking May &amp; June projects — limited design slots available. We respond within one business day.
+                        We offer free, no-obligation estimates to all prospective clients across South Texas.
+                        Fill out the form and we'll be in touch within one business day.
                     </p>
                 </motion.div>
 
@@ -62,7 +79,7 @@ export default function ContactForm() {
                     initial={{ opacity: 0, y: 28 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
-                    transition={{ type: 'spring', stiffness: 70, damping: 20, delay: 0.1 }}
+                    transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.1 }}
                 >
                     {success ? (
                         <motion.div
@@ -72,9 +89,9 @@ export default function ContactForm() {
                             transition={{ type: 'spring', stiffness: 160, damping: 22 }}
                         >
                             <CheckCircle size={42} strokeWidth={1.5} className={styles.successIcon} />
-                            <h3 className={styles.successTitle}>Inquiry Received</h3>
+                            <h3 className={styles.successTitle}>Quote Request Received</h3>
                             <p className={styles.successText}>
-                                We will review your project details and be in touch within one business day.
+                                We'll review your project details and be in touch within one business day.
                             </p>
                             <button className={styles.resetBtn} onClick={reset}>Submit Another</button>
                         </motion.div>
@@ -84,26 +101,26 @@ export default function ContactForm() {
                                 <div className={styles.field}>
                                     <label htmlFor="name" className={styles.fieldLabel}>Full Name</label>
                                     <input id="name" name="name" type="text" required className={styles.input}
-                                        value={form.name} onChange={handleChange} placeholder="Frank Lloyd Wright" />
+                                        value={form.name} onChange={handleChange} placeholder="Your full name" />
                                 </div>
                                 <div className={styles.field}>
-                                    <label htmlFor="email" className={styles.fieldLabel}>Email</label>
-                                    <input id="email" name="email" type="email" required className={styles.input}
-                                        value={form.email} onChange={handleChange} placeholder="flwright@gmail.com" />
+                                    <label htmlFor="phone" className={styles.fieldLabel}>Phone Number</label>
+                                    <input id="phone" name="phone" type="tel" required className={styles.input}
+                                        value={form.phone} onChange={handleChange} placeholder="(361) 000-0000" />
                                 </div>
                             </div>
 
                             <div className={styles.row}>
                                 <div className={styles.field}>
-                                    <label htmlFor="phone" className={styles.fieldLabel}>Phone</label>
-                                    <input id="phone" name="phone" type="tel" className={styles.input}
-                                        value={form.phone} onChange={handleChange} placeholder="+1 (361) 316-5251" />
+                                    <label htmlFor="email" className={styles.fieldLabel}>Email Address</label>
+                                    <input id="email" name="email" type="email" className={styles.input}
+                                        value={form.email} onChange={handleChange} placeholder="your@email.com" />
                                 </div>
                                 <div className={styles.field}>
-                                    <label htmlFor="projectType" className={styles.fieldLabel}>Project Type</label>
+                                    <label htmlFor="projectType" className={styles.fieldLabel}>Service Needed</label>
                                     <select id="projectType" name="projectType" required className={styles.select}
                                         value={form.projectType} onChange={handleChange}>
-                                        <option value="" disabled>Select type</option>
+                                        <option value="" disabled>Select a service</option>
                                         {PROJECT_TYPES.map((t) => (
                                             <option key={t} value={t}>{t}</option>
                                         ))}
@@ -112,30 +129,24 @@ export default function ContactForm() {
                             </div>
 
                             <div className={styles.field}>
-                                <label htmlFor="budget" className={styles.fieldLabel}>Estimated Budget</label>
-                                <select id="budget" name="budget" required className={styles.select}
-                                    value={form.budget} onChange={handleChange}>
-                                    <option value="" disabled>Select a range</option>
-                                    <option value="under-10k">Under $10,000</option>
-                                    <option value="10k-25k">$10,000 – $25,000</option>
-                                    <option value="25k-50k">$25,000 – $50,000</option>
-                                    <option value="50k-100k">$50,000 – $100,000</option>
-                                    <option value="100k-250k+">$100,000 – $250,000+</option>
-                                </select>
-                            </div>
-
-                            <div className={styles.field}>
-                                <label htmlFor="message" className={styles.fieldLabel}>Project Description</label>
+                                <label htmlFor="message" className={styles.fieldLabel}>Short Description</label>
                                 <textarea id="message" name="message" rows={3} className={styles.textarea}
                                     value={form.message} onChange={handleChange}
-                                    placeholder="Describe your site, goals, and any materials or styles you have in mind..." />
+                                    placeholder="Briefly describe your project — property type, approximate linear footage, material preferences, etc." />
                             </div>
 
-                            <p className={styles.trustLine}>Join 100+ homeowners who've transformed their outdoor space.</p>
+                            {submitError && (
+                                <p className={styles.errorLine}>
+                                    Something went wrong — please call us at (361) 777-9218.
+                                </p>
+                            )}
+                            <p className={styles.trustLine}>
+                                Free estimates &middot; No obligation &middot; Mon–Fri, 9am–5pm &middot; (361) 777-9218
+                            </p>
                             <button type="submit" className={styles.submitBtn} disabled={submitting}>
                                 {submitting
                                     ? <span className={styles.spinner} />
-                                    : <><span>Submit Project Inquiry</span><Send size={14} strokeWidth={2} /></>
+                                    : <><span>Request Free Quote</span><Send size={14} strokeWidth={2} /></>
                                 }
                             </button>
                         </form>
