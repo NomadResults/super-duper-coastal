@@ -21,27 +21,19 @@ export default async function handler(req, res) {
             email,
             locationId: process.env.GHL_LOCATION_ID,
             source: 'Website Contact Form',
-            tags: [projectType].filter(Boolean),
+            tags: ['Website Lead', projectType].filter(Boolean),
         }),
     });
 
-    let contactId;
-
     if (!contactRes.ok) {
-        const errData = await contactRes.json().catch(() => null);
-        // Duplicate contact — reuse the existing one
-        if (errData?.statusCode === 400 && errData?.meta?.contactId) {
-            contactId = errData.meta.contactId;
-        } else {
-            return res.status(502).json({ error: 'GHL API error', detail: JSON.stringify(errData) });
-        }
-    } else {
-        const { contact } = await contactRes.json();
-        contactId = contact?.id;
+        const detail = await contactRes.text();
+        return res.status(502).json({ error: 'GHL API error', detail });
     }
 
-    if (contactId) {
-        await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/notes`, {
+    const { contact } = await contactRes.json();
+
+    if (message && contact?.id) {
+        await fetch(`https://services.leadconnectorhq.com/contacts/${contact.id}/notes`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${process.env.GHL_API_KEY}`,
