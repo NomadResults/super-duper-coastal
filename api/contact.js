@@ -57,7 +57,7 @@ export default async function handler(req, res) {
                 method: 'POST',
                 headers: GHL_HEADERS(key),
                 body: JSON.stringify({
-                    title: `${firstName} ${lastName} — ${projectType || 'Website Inquiry'}`,
+                    name: `${firstName} ${lastName} — ${projectType || 'Website Inquiry'}`,
                     contactId,
                     locationId,
                     pipelineId: 'rGq01MAkw86vnGeseadU',
