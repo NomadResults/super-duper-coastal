@@ -7,13 +7,6 @@ const FILTERS = ['All', 'Hardscaping', 'Outdoor Kitchens', 'Landscaping', 'Light
 
 const PROJECTS = [
     {
-        id: 1,
-        title: 'Travertine Patio & Retaining Wall',
-        tag: 'Hardscaping',
-        location: 'Corpus Christi, TX',
-        img: 'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69063c713081bc07773b8137.png',
-    },
-    {
         id: 2,
         title: 'Full Outdoor Kitchen Build',
         tag: 'Outdoor Kitchens',
