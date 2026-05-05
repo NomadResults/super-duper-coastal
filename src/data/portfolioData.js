@@ -25,7 +25,7 @@ export const CATEGORIES = [
     {
         slug: 'outdoor-kitchens',
         label: 'Outdoor Kitchens',
-        cover: cdn('https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69fa0c11becb53a735fc5fe0.png'),
+        cover: cdn('https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69fa0c11becb53a735fc5fd2.png'),
         photos: [
             { img: cdn('https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69fa0c11becb53a735fc5fe0.png'), title: 'Full Outdoor Kitchen Build' },
             { img: cdn('https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69fa0c11becb53a735fc5fd2.png'), title: 'Custom Outdoor Kitchen & Bar' },
