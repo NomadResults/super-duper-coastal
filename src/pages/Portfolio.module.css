@@ -66,58 +66,77 @@
 /* ── Body ── */
 .body {
     background-color: var(--bg);
-    padding: 4rem 0 5rem;
+    padding: 3rem 0 5rem;
 }
 
-/* ── Filter row ── */
-.filterRow {
+/* ── Accordion ── */
+.accordion {
+    border-bottom: 1px solid var(--border);
+}
+
+.accordion:first-child {
+    border-top: 1px solid var(--border);
+}
+
+.accordionHeader {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 3rem;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1.4rem 0;
+    cursor: pointer;
+    text-align: left;
 }
 
-.filterBtn {
-    font-family: 'Outfit', system-ui, sans-serif;
-    font-size: 0.62rem;
+.accordionLabel {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.accordionMeta {
+    font-size: 0.6rem;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--text-secondary);
-    background: none;
-    border: 1px solid var(--border);
-    padding: 0.5rem 1.1rem;
-    cursor: pointer;
-    transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 }
 
-.filterBtn:hover {
-    border-color: var(--accent);
+.chevron {
     color: var(--accent);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
 }
 
-.filterBtnActive {
-    border-color: var(--accent-bright);
-    color: var(--navy);
-    background-color: var(--accent-bright);
+.chevronOpen {
+    transform: rotate(180deg);
 }
 
-.filterBtnActive:hover {
-    border-color: var(--accent-bright);
-    color: var(--navy);
-    background-color: var(--accent-bright);
+.accordionBody {
+    overflow: hidden;
 }
 
-/* ── Project grid ── */
-.grid {
+/* ── Photo grid ── */
+.photoGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
+    gap: 1.25rem;
+    padding-bottom: 2rem;
 }
 
-.card {
+.photoCard {
     display: flex;
     flex-direction: column;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
 }
 
 .imgWrap {
@@ -156,27 +175,19 @@
     padding: 0.55rem 1.25rem;
 }
 
-.card:hover .overlay { opacity: 1; }
-.card:hover .img { transform: scale(1.04); }
+.photoCard:hover .overlay { opacity: 1; }
+.photoCard:hover .img { transform: scale(1.04); }
 
 .cardInfo {
-    padding: 1rem 0 0.25rem;
+    padding: 0.75rem 0 0.25rem;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
-}
-
-.cardTag {
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--accent);
+    gap: 0.25rem;
 }
 
 .cardTitle {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.15rem;
+    font-size: 1.05rem;
     font-weight: 500;
     color: var(--text-primary);
     line-height: 1.25;
@@ -184,7 +195,7 @@
 }
 
 .cardLocation {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 300;
     color: var(--text-secondary);
     letter-spacing: 0.04em;
@@ -285,17 +296,119 @@
 
 .ctaBtn:hover { background-color: #ffffff; }
 
+/* ── Lightbox ── */
+.lightboxOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 20, 35, 0.95);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.lightboxContent {
+    position: relative;
+    max-width: min(90vw, 1100px);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.lightboxImg {
+    display: block;
+    max-width: 100%;
+    max-height: 78vh;
+    object-fit: contain;
+    border: 1px solid rgba(196, 168, 96, 0.2);
+}
+
+.lightboxCaption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.lightboxTitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: -0.01em;
+}
+
+.lightboxLocation {
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: var(--accent-bright);
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+}
+
+.lightboxClose {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    z-index: 1001;
+}
+
+.lightboxClose:hover {
+    border-color: var(--accent-bright);
+    color: var(--accent-bright);
+}
+
+.lightboxNav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    z-index: 1001;
+}
+
+.lightboxNav:hover {
+    border-color: var(--accent-bright);
+    color: var(--accent-bright);
+}
+
+.lightboxPrev { left: 1.25rem; }
+.lightboxNext { right: 1.25rem; }
+
 /* ── Responsive ── */
 @media (max-width: 900px) {
     .hero { padding: 4rem 0 3rem; }
-    .grid { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+    .photoGrid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .lightboxNav { display: none; }
 }
 
 @media (max-width: 560px) {
     .hero { padding: 3rem 0 2.5rem; }
-    .body { padding: 3rem 0 4rem; }
-    .grid { grid-template-columns: 1fr; }
+    .body { padding: 2rem 0 4rem; }
+    .photoGrid { grid-template-columns: 1fr; }
     .ctaInner { flex-direction: column; align-items: flex-start; }
     .ctaBand { padding: 2.5rem 0; }
-    .filterRow { gap: 0.4rem; }
+    .accordionHeader { padding: 1.1rem 0; }
+    .lightboxImg { max-height: 60vh; }
+    .lightboxCaption { flex-direction: column; align-items: flex-start; gap: 0.25rem; }
 }
