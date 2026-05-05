@@ -25,6 +25,7 @@ import OutdoorLighting from './pages/OutdoorLighting';
 import Landscaping from './pages/Landscaping';
 import ArtificialTurf from './pages/ArtificialTurf';
 import Portfolio from './pages/Portfolio';
+import PortfolioCategory from './pages/PortfolioCategory';
 import OurStorySection from './components/OurStorySection';
 
 function ScrollToTop() {
@@ -78,6 +79,7 @@ function App() {
                 <Route path="/services/artificial-turf" element={<ArtificialTurf />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/portfolio/:slug" element={<PortfolioCategory />} />
             </Routes>
             <Footer />
         </>
