@@ -15,7 +15,7 @@ export const CATEGORIES = [
     {
         slug: 'landscaping',
         label: 'Landscaping',
-        cover: cdn('https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69fa0051becb53a735f918f1.png'),
+        cover: cdn('https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69fa0e853637549c491b7780.png'),
         photos: [
             { img: cdn('https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69fa0051becb53a735f918f1.png'), title: 'Coastal Landscape Design' },
             { img: cdn('https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69fa0052d38dd61887f9f956.png'), title: 'Native Plant Landscaping' },
