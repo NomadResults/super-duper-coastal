@@ -1,5 +1,5 @@
-import React from 'react';
 import ServicePage from './ServicePage';
+import { CATEGORIES } from '../data/portfolioData';
 
 const related = [
     { name: 'Stone Patios & Hardscaping', href: '/services/stone-patios' },
@@ -7,11 +7,7 @@ const related = [
     { name: 'Landscaping', href: '/services/landscaping' },
 ];
 
-const photos = [
-    '/trees c2c.png',
-    '/doors c2c.png',
-    '/dog c2c.png',
-];
+const photos = CATEGORIES.find(c => c.slug === 'lighting')?.photos.map(p => p.img) ?? [];
 
 export default function OutdoorLighting() {
     return (

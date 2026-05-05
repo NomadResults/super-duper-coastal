@@ -1,5 +1,5 @@
-import React from 'react';
 import ServicePage from './ServicePage';
+import { CATEGORIES } from '../data/portfolioData';
 
 const related = [
     { name: 'Outdoor Kitchens', href: '/services/outdoor-kitchens' },
@@ -7,11 +7,7 @@ const related = [
     { name: 'Landscaping', href: '/services/landscaping' },
 ];
 
-const photos = [
-    'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69063c713081bc07773b8137.png',
-    'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/690b9eeed79eed5c82922c77.png',
-    'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/2cc8275c-2e27-4e01-966a-9bc424ab12da.png',
-];
+const photos = CATEGORIES.find(c => c.slug === 'hardscaping')?.photos.map(p => p.img) ?? [];
 
 export default function StonePatios() {
     return (

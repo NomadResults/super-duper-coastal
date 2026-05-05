@@ -1,16 +1,12 @@
-import React from 'react';
 import ServicePage from './ServicePage';
+import { CATEGORIES } from '../data/portfolioData';
 
 const related = [
-    { name: 'Landscaping',              href: '/services/landscaping' },
+    { name: 'Landscaping', href: '/services/landscaping' },
     { name: 'Stone Patios & Hardscaping', href: '/services/stone-patios' },
 ];
 
-const photos = [
-    'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/690b9c776fadaad84c5cdf12.png',
-    'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/690b9c776fadaa77145cdf10.png',
-    'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/690b9a07095b9ca106d5afdb.jpg',
-];
+const photos = CATEGORIES.find(c => c.slug === 'turf')?.photos.map(p => p.img) ?? [];
 
 export default function ArtificialTurf() {
     return (
