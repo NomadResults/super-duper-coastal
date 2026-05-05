@@ -74,7 +74,6 @@ export default function PortfolioCategory() {
                                         <span className={styles.overlayLabel}>View Full Size</span>
                                     </div>
                                 </div>
-                                <p className={styles.photoTitle}>{photo.title}</p>
                             </motion.button>
                         ))}
                     </div>

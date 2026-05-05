@@ -26,7 +26,7 @@ export default function Portfolio() {
             <section className={styles.body}>
                 <div className="container">
                     <div className={styles.grid}>
-                        {CATEGORIES.map(({ slug, label, cover, photos }, i) => (
+                        {CATEGORIES.map(({ slug, label, cover }, i) => (
                             <motion.div
                                 key={slug}
                                 initial={{ opacity: 0, y: 24 }}
@@ -40,10 +40,7 @@ export default function Portfolio() {
                                             <span className={styles.overlayLabel}>View Projects <ArrowRight size={12} strokeWidth={2} /></span>
                                         </div>
                                     </div>
-                                    <div className={styles.cardInfo}>
-                                        <h3 className={styles.cardTitle}>{label}</h3>
-                                        <span className={styles.cardCount}>{photos.length} Projects</span>
-                                    </div>
+                                    <h3 className={styles.cardTitle}>{label}</h3>
                                 </Link>
                             </motion.div>
                         ))}
