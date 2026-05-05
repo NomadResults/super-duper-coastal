@@ -1,8 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { CATEGORIES } from '../data/portfolioData';
 import styles from './ServicesSection.module.css';
+
+const coverOf = (slug) => CATEGORIES.find((c) => c.slug === slug)?.cover ?? '';
 
 export const SERVICES = [
     {
@@ -12,7 +14,7 @@ export const SERVICES = [
         description:
             "Custom patios, walkways, driveways, and retaining walls built from travertine, limestone, flagstone, and concrete pavers. Designed for South Texas conditions — architecturally precise, structurally sound, and built to outlast the climate.",
         href: '/services/stone-patios',
-        image: 'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/690b9eee92b355b801f96d35.png',
+        image: coverOf('hardscaping'),
     },
     {
         id: '02',
@@ -21,7 +23,7 @@ export const SERVICES = [
         description:
             "Full outdoor kitchen builds designed around your cooking style and social space. Stone-clad counters, premium grill stations, refrigeration, and bar seating — engineered for the Coastal Bend lifestyle and built to handle the elements.",
         href: '/services/outdoor-kitchens',
-        image: 'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/690b9eeedc2a5419d8819491.png',
+        image: coverOf('outdoor-kitchens'),
     },
     {
         id: '03',
@@ -30,7 +32,7 @@ export const SERVICES = [
         description:
             "Architectural lighting systems that transform your property from dusk onward. Path lighting, uplighting, and precision accent fixtures — all spec'd for coastal humidity, UV exposure, and long-term performance with zero compromise on aesthetics.",
         href: '/services/outdoor-lighting',
-        image: 'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/690b9eeedc2a54804d819490.png',
+        image: coverOf('lighting'),
     },
     {
         id: '04',
@@ -39,7 +41,7 @@ export const SERVICES = [
         description:
             "Native and adaptive plantings, drainage solutions, and structured beds engineered for South Texas heat, salt air, and storm season. Built to perform year-round — not just look good on day one.",
         href: '/services/landscaping',
-        image: 'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/690b9c776fadaac0b25cdf11.png',
+        image: coverOf('landscaping'),
     },
     {
         id: '05',
@@ -48,7 +50,7 @@ export const SERVICES = [
         description:
             "Premium synthetic turf systems installed with proper base prep, infill, and drainage for a natural look that survives South Texas heat without the maintenance. Full backyard replacements, play areas, and custom putting greens.",
         href: '/services/artificial-turf',
-        image: 'https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/690b9c776fadaad84c5cdf12.png',
+        image: coverOf('turf'),
     },
 ];
 
@@ -106,7 +108,7 @@ export default function ServicesSection({ showHeader = true, showCta = true }) {
                         whileInView="visible"
                         viewport={{ once: true, amount: 0.05 }}
                     >
-                        {SERVICES.map((svc, i) => (
+                        {SERVICES.map((svc) => (
                             <motion.div key={svc.id} variants={cardVariants} className={styles.card}>
                                 <Link to={svc.href} className={styles.cardLink}>
                                     <div className={styles.cardImgWrap}>
