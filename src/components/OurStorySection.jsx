@@ -51,8 +51,8 @@ export default function OurStorySection({ showValues = true }) {
                             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                         >
                             <img
-                                src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/690b9eee92b355b801f96d35.png"
-                                alt="Coast to Coast Landscape & Design project"
+                                src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69fb57aaa6982c16557cc36a.png"
+                                alt="Coast to Coast Landscape & Design owner"
                                 className={styles.img}
                                 loading="lazy"
                             />
