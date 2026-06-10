@@ -19,11 +19,9 @@ const services = [
     { label: 'Artificial Turf',      href: '/services/artificial-turf' },
 ];
 const social = [
-    { label: 'Facebook',  href: '#' },
-    { label: 'Instagram', href: '#' },
-    { label: 'Google',    href: '#' },
-    { label: 'Youtube',   href: '#' },
-    { label: 'Houzz',     href: '#' },
+    { label: 'Instagram', href: 'https://www.instagram.com/coast2coastld/' },
+    { label: 'Facebook',  href: 'https://www.facebook.com/profile.php?id=61565415870458' },
+    { label: 'Google',    href: 'https://share.google/9SoFK4YIhQsiAXAE0' },
 ];
 
 export default function Footer() {
@@ -88,7 +86,7 @@ export default function Footer() {
                         <ul className={styles.list}>
                             {social.map((s) => (
                                 <li key={s.label}>
-                                    <a href={s.href} className={styles.listLink}>{s.label}</a>
+                                    <a href={s.href} className={styles.listLink} target="_blank" rel="noopener noreferrer">{s.label}</a>
                                 </li>
                             ))}
                         </ul>

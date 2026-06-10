@@ -265,7 +265,9 @@ export default function AreaDetailPage() {
             })),
         },
         sameAs: [
-            'https://www.instagram.com/coasttocoastlandscapedesign',
+            'https://www.instagram.com/coast2coastld/',
+            'https://www.facebook.com/profile.php?id=61565415870458',
+            'https://share.google/9SoFK4YIhQsiAXAE0',
         ],
     };
 
