@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.coast2coastlandscapes.com/sitemap.xml

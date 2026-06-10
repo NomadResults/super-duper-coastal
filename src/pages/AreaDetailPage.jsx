@@ -182,7 +182,7 @@ const allServices = [
     { label: 'Artificial Turf',  href: '/services/artificial-turf' },
 ];
 
-const SITE_URL = 'https://coasttocoastlandscapedesign.com';
+const SITE_URL = 'https://www.coast2coastlandscapes.com';
 const PHONE = '(361) 316-5251';
 const ADDRESS = '201 16th St, Corpus Christi, TX';
 
