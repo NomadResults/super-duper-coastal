@@ -20,6 +20,7 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
     const [form, setForm] = useState(EMPTY_FORM);
     const [submitting, setSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [submitError, setSubmitError] = useState(false);
     const formRef = useRef(null);
 
     const openForm = () => {
@@ -31,13 +32,26 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setSubmitting(true);
-        setTimeout(() => { setSubmitting(false); setSuccess(true); }, 1400);
+        setSubmitError(false);
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(form),
+            });
+            if (!res.ok) throw new Error('Failed');
+            setSuccess(true);
+        } catch {
+            setSubmitError(true);
+        } finally {
+            setSubmitting(false);
+        }
     };
 
-    const reset = () => { setSuccess(false); setForm(EMPTY_FORM); };
+    const reset = () => { setSuccess(false); setSubmitError(false); setForm(EMPTY_FORM); };
 
     return (
         <main className={styles.page}>
@@ -128,18 +142,18 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
                                                     <form onSubmit={handleSubmit} className={styles.form}>
                                                         <div className={styles.row}>
                                                             <div className={styles.field}>
-                                                                <label className={styles.fieldLabel}>Full Name</label>
+                                                                <label htmlFor="svc-name" className={styles.fieldLabel}>Full Name</label>
                                                                 <input
-                                                                    name="name" type="text" required
+                                                                    id="svc-name" name="name" type="text" required
                                                                     className={styles.input}
                                                                     value={form.name} onChange={handleChange}
                                                                     placeholder="Eloise Hartmann"
                                                                 />
                                                             </div>
                                                             <div className={styles.field}>
-                                                                <label className={styles.fieldLabel}>Email</label>
+                                                                <label htmlFor="svc-email" className={styles.fieldLabel}>Email</label>
                                                                 <input
-                                                                    name="email" type="email" required
+                                                                    id="svc-email" name="email" type="email" required
                                                                     className={styles.input}
                                                                     value={form.email} onChange={handleChange}
                                                                     placeholder="eloise@example.com"
@@ -149,18 +163,18 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
 
                                                         <div className={styles.row}>
                                                             <div className={styles.field}>
-                                                                <label className={styles.fieldLabel}>Phone</label>
+                                                                <label htmlFor="svc-phone" className={styles.fieldLabel}>Phone</label>
                                                                 <input
-                                                                    name="phone" type="tel"
+                                                                    id="svc-phone" name="phone" type="tel"
                                                                     className={styles.input}
                                                                     value={form.phone} onChange={handleChange}
                                                                     placeholder="+1 (361) 316-5251"
                                                                 />
                                                             </div>
                                                             <div className={styles.field}>
-                                                                <label className={styles.fieldLabel}>Project Type</label>
+                                                                <label htmlFor="svc-projectType" className={styles.fieldLabel}>Project Type</label>
                                                                 <select
-                                                                    name="projectType" required
+                                                                    id="svc-projectType" name="projectType" required
                                                                     className={styles.select}
                                                                     value={form.projectType} onChange={handleChange}
                                                                 >
@@ -173,9 +187,9 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
                                                         </div>
 
                                                         <div className={styles.field}>
-                                                            <label className={styles.fieldLabel}>Estimated Budget</label>
+                                                            <label htmlFor="svc-budget" className={styles.fieldLabel}>Estimated Budget</label>
                                                             <select
-                                                                name="budget" required
+                                                                id="svc-budget" name="budget" required
                                                                 className={styles.select}
                                                                 value={form.budget} onChange={handleChange}
                                                             >
@@ -189,15 +203,21 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
                                                         </div>
 
                                                         <div className={styles.field}>
-                                                            <label className={styles.fieldLabel}>Project Description</label>
+                                                            <label htmlFor="svc-message" className={styles.fieldLabel}>Project Description</label>
                                                             <textarea
-                                                                name="message" rows={4}
+                                                                id="svc-message" name="message" rows={4}
                                                                 className={styles.textarea}
                                                                 value={form.message} onChange={handleChange}
                                                                 placeholder="Describe your site, goals, and any materials or styles you have in mind..."
                                                             />
                                                         </div>
 
+                                                        {submitError && (
+                                                            <p className={styles.errorLine}>
+                                                                Something went wrong — please call us at{' '}
+                                                                <a href="tel:+13613165251">(361) 316-5251</a>.
+                                                            </p>
+                                                        )}
                                                         <button type="submit" className={styles.submitBtn} disabled={submitting}>
                                                             {submitting
                                                                 ? <span className={styles.spinner} />
