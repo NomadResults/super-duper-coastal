@@ -22,6 +22,11 @@ export default function Landscaping() {
             ctaText="Request a Consultation"
             relatedServices={related}
             photos={photos}
+            seo={{
+                title: 'Landscaping Services in Corpus Christi, TX | Coast to Coast Landscape & Design',
+                description: 'Full-service landscape design and installation for the Coastal Bend — native plantings, structured beds, drainage, and irrigation-smart layouts built for South Texas.',
+                path: '/services/landscaping',
+            }}
         />
     );
 }

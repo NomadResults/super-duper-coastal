@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { CATEGORIES } from '../data/portfolioData';
+import Seo from '../components/Seo';
 import styles from './PortfolioCategory.module.css';
 
 export default function PortfolioCategory() {
@@ -34,6 +35,12 @@ export default function PortfolioCategory() {
 
     return (
         <main className={styles.page}>
+            <Seo
+                title={`${label} Projects in Corpus Christi, TX | Coast to Coast Landscape & Design`}
+                description={`Completed ${label.toLowerCase()} projects by Coast to Coast Landscape & Design across Corpus Christi and the Coastal Bend.`}
+                path={`/portfolio/${slug}`}
+                image={photos[0]?.img}
+            />
             {/* Hero */}
             <section className={styles.hero}>
                 <div className="container">

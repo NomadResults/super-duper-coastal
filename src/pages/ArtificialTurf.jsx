@@ -21,6 +21,11 @@ export default function ArtificialTurf() {
             ctaText="Request a Turf Consultation"
             relatedServices={related}
             photos={photos}
+            seo={{
+                title: 'Artificial Turf Installation in Corpus Christi, TX | Coast to Coast Landscape & Design',
+                description: 'Premium synthetic turf installation for Corpus Christi and the Coastal Bend — UV-resistant systems with proper base prep and drainage for yards, play areas, and putting greens.',
+                path: '/services/artificial-turf',
+            }}
         />
     );
 }

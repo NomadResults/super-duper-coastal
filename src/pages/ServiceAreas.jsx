@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Seo from '../components/Seo';
 import styles from './ServiceAreas.module.css';
 
 const areas = [
@@ -53,6 +54,11 @@ const fadeUp = {
 export default function ServiceAreas() {
     return (
         <main className={styles.page}>
+            <Seo
+                title="Service Areas — Coastal Bend & South Texas | Coast to Coast Landscape & Design"
+                description="Serving Corpus Christi, Rockport, Port Aransas, Portland, Ingleside, Calallen, and Flour Bluff with design-build hardscape, landscape, and outdoor living."
+                path="/service-areas"
+            />
             {/* Hero */}
             <section className={styles.hero}>
                 <div className="container">

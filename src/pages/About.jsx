@@ -2,10 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './About.module.css';
 import OurStorySection from '../components/OurStorySection';
+import Seo from '../components/Seo';
 
 export default function About() {
     return (
         <main className={styles.page}>
+            <Seo
+                title="About Us — Design-Build Outdoor Living | Coast to Coast Landscape & Design"
+                description="Corpus Christi–based design-build firm creating stone patios, outdoor kitchens, and landscapes engineered for Gulf Coast conditions. One team from concept to completion."
+                path="/about"
+            />
             {/* Hero */}
             <section className={styles.hero}>
                 <div className="container">

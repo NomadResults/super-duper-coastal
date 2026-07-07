@@ -22,6 +22,11 @@ export default function OutdoorLighting() {
             ctaText="Schedule a Consultation"
             relatedServices={related}
             photos={photos}
+            seo={{
+                title: 'Landscape Lighting in Corpus Christi, TX | Coast to Coast Landscape & Design',
+                description: 'Low-voltage architectural landscape lighting for Corpus Christi and the Coastal Bend — uplighting, path lighting, and smart controls built for coastal salt air.',
+                path: '/services/outdoor-lighting',
+            }}
         />
     );
 }

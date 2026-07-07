@@ -2,11 +2,17 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { CATEGORIES } from '../data/portfolioData';
+import Seo from '../components/Seo';
 import styles from './Portfolio.module.css';
 
 export default function Portfolio() {
     return (
         <main className={styles.page}>
+            <Seo
+                title="Our Work — Landscape & Hardscape Portfolio | Coast to Coast Landscape & Design"
+                description="Completed hardscaping, landscaping, outdoor kitchen, lighting, and turf projects across Corpus Christi and the Coastal Bend."
+                path="/portfolio"
+            />
             <section className={styles.hero}>
                 <div className="container">
                     <motion.div

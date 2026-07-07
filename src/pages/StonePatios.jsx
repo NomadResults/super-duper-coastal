@@ -22,6 +22,11 @@ export default function StonePatios() {
             ctaText="Schedule a Design Consultation"
             relatedServices={related}
             photos={photos}
+            seo={{
+                title: 'Stone Patios & Hardscaping in Corpus Christi, TX | Coast to Coast Landscape & Design',
+                description: 'Custom stone patios, walkways, driveways, and retaining walls in travertine, limestone, flagstone, and pavers — designed and built for Corpus Christi and the Coastal Bend.',
+                path: '/services/stone-patios',
+            }}
         />
     );
 }

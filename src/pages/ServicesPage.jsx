@@ -1,11 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ServicesSection from '../components/ServicesSection';
+import Seo from '../components/Seo';
 import styles from './ServicesPage.module.css';
 
 export default function ServicesPage() {
     return (
         <main className={styles.page}>
+            <Seo
+                title="Outdoor Living Services in Corpus Christi, TX | Coast to Coast Landscape & Design"
+                description="Stone patios, outdoor kitchens, landscape lighting, landscaping, and artificial turf — one design-build team serving Corpus Christi and the Coastal Bend."
+                path="/services"
+            />
+
             {/* ── Hero ── */}
             <section className={styles.hero}>
                 <div className="container">

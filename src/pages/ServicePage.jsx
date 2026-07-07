@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Send, CheckCircle, X } from 'lucide-react';
+import Seo from '../components/Seo';
 import styles from './ServicePage.module.css';
 
 const PROJECT_TYPES = [
@@ -15,7 +16,7 @@ const PROJECT_TYPES = [
 
 const EMPTY_FORM = { name: '', email: '', phone: '', projectType: '', budget: '', message: '' };
 
-export default function ServicePage({ label, headline, body, ctaText, relatedServices = [], photos = [] }) {
+export default function ServicePage({ label, headline, body, ctaText, relatedServices = [], photos = [], seo }) {
     const [formOpen, setFormOpen] = useState(false);
     const [form, setForm] = useState(EMPTY_FORM);
     const [submitting, setSubmitting] = useState(false);
@@ -55,6 +56,8 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
 
     return (
         <main className={styles.page}>
+            {seo && <Seo {...seo} image={photos[0]} />}
+
             {/* Hero */}
             <section className={styles.hero}>
                 <div className="container">

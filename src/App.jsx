@@ -5,6 +5,7 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Seo from './components/Seo';
 
 // Home sections
 import Hero from './components/Hero';
@@ -51,6 +52,12 @@ function ScrollToTop() {
 function HomePage() {
     return (
         <main>
+            {/* Mirrors index.html so client-side nav back home restores the default meta */}
+            <Seo
+                title="Coast to Coast Landscape & Design — Luxury Hardscape & Drought-Ready Landscaping in Corpus Christi, TX"
+                description="Coast to Coast Landscape & Design crafts high-end outdoor environments — stone terraces, custom retaining walls, permeable hardscape, and drought-ready landscapes across Corpus Christi, Rockport, Port Aransas, and the Coastal Bend."
+                path="/"
+            />
             <Hero />
             <ServicesSection showHeader={true} showCta={false} />
             <OurStorySection showValues={false} />

@@ -22,6 +22,11 @@ export default function OutdoorKitchens() {
             ctaText="Start Your Design Consultation"
             relatedServices={related}
             photos={photos}
+            seo={{
+                title: 'Custom Outdoor Kitchens in Corpus Christi, TX | Coast to Coast Landscape & Design',
+                description: 'Design-build outdoor kitchens for Corpus Christi and the Coastal Bend — built-in grills, stone counters, refrigeration, bars, and pergolas engineered for Gulf Coast conditions.',
+                path: '/services/outdoor-kitchens',
+            }}
         />
     );
 }
