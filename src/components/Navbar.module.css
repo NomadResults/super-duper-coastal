@@ -278,6 +278,7 @@
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.88);
     text-decoration: none;
+    white-space: nowrap;
     transition: color 0.2s ease;
 }
 
@@ -412,10 +413,15 @@
     padding-bottom: env(safe-area-inset-bottom);
 }
 
+/* The full desktop layout (logo + 4 links + phone + CTA) needs ~1150px.
+   Below that, keep the hamburger so nothing collides or clips. */
 @media (min-width: 768px) {
-    .desktopNav { display: flex; }
     .phoneLink { display: inline-flex; align-items: center; }
     .ctaBtn { display: inline-flex; align-items: center; }
+}
+
+@media (min-width: 1160px) {
+    .desktopNav { display: flex; }
     .menuBtn { display: none; }
 }
 
