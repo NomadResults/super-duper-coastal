@@ -121,6 +121,11 @@
     margin-bottom: 0.5rem;
 }
 
+.errorLine a {
+    color: inherit;
+    text-decoration: underline;
+}
+
 .trustLine {
     font-size: 0.7rem;
     font-weight: 500;

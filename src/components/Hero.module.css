@@ -180,9 +180,11 @@
     justify-content: center;
 }
 
+/* The badge sits in the hero's white-fade zone, so the backdrop is always light:
+   dark gold + navy read there; white text disappears. */
 .reviewStars {
     font-size: 0.78rem;
-    color: var(--accent-bright);
+    color: var(--accent);
     letter-spacing: 0.06em;
 }
 
@@ -191,7 +193,7 @@
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-secondary);
 }
 
 /* Bottom-left: gold ruled line + "Est. 2009" */
@@ -208,7 +210,7 @@
 .goldLine {
     width: 6rem;
     height: 1px;
-    background-color: var(--accent-bright);
+    background-color: var(--accent);
 }
 
 .estText {
@@ -216,7 +218,7 @@
     font-weight: 700;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--accent-bright);
+    color: var(--accent); /* dark gold — bottom-left sits on the white fade */
 }
 
 @media (max-width: 640px) {

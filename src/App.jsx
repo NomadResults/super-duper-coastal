@@ -9,9 +9,6 @@ import Footer from './components/Footer';
 // Home sections
 import Hero from './components/Hero';
 import ServicesSection from './components/ServicesSection';
-import BeforeAfter from './components/BeforeAfter';
-import WhyUs from './components/WhyUs';
-import Capabilities from './components/Capabilities';
 import Process from './components/Process';
 import Testimonials from './components/Testimonials';
 import ContactForm from './components/ContactForm';

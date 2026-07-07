@@ -23,7 +23,8 @@ export default function About() {
 
             <div className={styles.goldRule} />
 
-            <OurStorySection />
+            {/* Page hero already says "Built for the Coastal Bend" — skip the section's own intro */}
+            <OurStorySection showIntro={false} />
 
             {/* CTA band */}
             <section className={styles.ctaBand}>

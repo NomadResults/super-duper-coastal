@@ -9,7 +9,7 @@ const VALUES = [
     { icon: Star,        label: 'Workmanship Guarantee',  stat: '★★★★★', sub: 'Backed by Our Name' },
 ];
 
-export default function OurStorySection({ showValues = true }) {
+export default function OurStorySection({ showValues = true, showIntro = true }) {
     return (
         <>
             {/* Story */}
@@ -18,13 +18,17 @@ export default function OurStorySection({ showValues = true }) {
                     <div className={styles.storyGrid}>
                         <motion.div
                             className={styles.storyCopy}
-                            initial={{ opacity: 0, x: -24 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-80px' }}
                             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                         >
-                            <span className={styles.eyebrow}>Our Story</span>
-                            <h2 className={styles.storyHeadline}>Built for the Coastal Bend</h2>
+                            {showIntro && (
+                                <>
+                                    <span className={styles.eyebrow}>Our Story</span>
+                                    <h2 className={styles.storyHeadline}>Built for the Coastal Bend</h2>
+                                </>
+                            )}
                             <p className={styles.para}>
                                 Coast to Coast Landscape &amp; Design was founded in 2024 with a single conviction: South Texas homeowners deserve the same level of outdoor design craftsmanship as anywhere else in the country — built specifically for the demands of the Gulf Coast environment.
                             </p>
@@ -45,8 +49,8 @@ export default function OurStorySection({ showValues = true }) {
 
                         <motion.div
                             className={styles.storyImage}
-                            initial={{ opacity: 0, x: 24 }}
-                            whileInView={{ opacity: 1, x: 0 }}
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: '-80px' }}
                             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                         >

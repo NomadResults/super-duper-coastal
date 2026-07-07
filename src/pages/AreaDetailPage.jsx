@@ -346,7 +346,7 @@ export default function AreaDetailPage() {
                         width="1440"
                         height="580"
                         loading="eager"
-                        fetchpriority="high"
+                        fetchPriority="high"
                     />
                     <div className={styles.heroPhotoOverlay} />
                 </motion.div>

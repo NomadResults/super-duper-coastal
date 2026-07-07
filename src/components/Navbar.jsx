@@ -51,7 +51,9 @@ function NavItem({ link, scrolled }) {
                 <button
                     className={`${styles.navLink} ${styles.navLinkBtn}`}
                     onClick={() => setOpen(!open)}
+                    onKeyDown={(e) => { if (e.key === 'Escape') setOpen(false); }}
                     aria-expanded={open}
+                    aria-haspopup="true"
                 >
                     {link.label}
                     <ChevronDown size={12} strokeWidth={2} className={`${styles.chevron} ${open ? styles.chevronOpen : ''}`} />
@@ -139,6 +141,7 @@ export default function Navbar() {
                         className={styles.menuBtn}
                         onClick={() => setMobileOpen(!mobileOpen)}
                         aria-label="Toggle menu"
+                        aria-expanded={mobileOpen}
                     >
                         {mobileOpen ? <X size={20} strokeWidth={1.5} /> : <Menu size={20} strokeWidth={1.5} />}
                     </button>

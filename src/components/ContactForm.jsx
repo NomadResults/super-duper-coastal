@@ -67,7 +67,7 @@ export default function ContactForm() {
                         Ready to transform<br />your <em>outdoor space?</em>
                     </h2>
                     <p className={styles.sectionSubtext}>
-                        Currently booking May &amp; June projects — limited design slots available. We respond within one business day.
+                        Limited design slots available each month. We respond within one business day.
                     </p>
                 </motion.div>
 
@@ -148,7 +148,8 @@ export default function ContactForm() {
 
                             {submitError && (
                                 <p className={styles.errorLine}>
-                                    Something went wrong — please email us directly.
+                                    Something went wrong — please call us at{' '}
+                                    <a href="tel:+13613165251">(361) 316-5251</a>.
                                 </p>
                             )}
                             <p className={styles.trustLine}>Join 100+ homeowners who've transformed their outdoor space.</p>

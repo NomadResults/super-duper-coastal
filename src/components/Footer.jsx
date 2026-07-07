@@ -97,11 +97,6 @@ export default function Footer() {
                     <p className={styles.copy}>
                         &copy; 2026 Coast to Coast Landscape &amp; Design. All Rights Reserved.
                     </p>
-                    <div className={styles.legal}>
-                        {['Privacy Policy', 'Terms of Service'].map((l) => (
-                            <a key={l} href="#" className={styles.legalLink}>{l}</a>
-                        ))}
-                    </div>
                 </div>
             </div>
         </footer>
