@@ -9,9 +9,7 @@ const STEPS = [
         Icon: MessageSquare,
         title: 'Contact Us',
         desc: "Start by reaching out to share your Landscape Design & Build vision with us. No lengthy forms — just a real conversation about what you want to create.",
-        timeline: 'Response within 60 seconds',
-        cta: 'Get A Quote',
-        href: '/#contact',
+        timeline: 'Response within one business day',
     },
     {
         num: 'II',
@@ -19,8 +17,6 @@ const STEPS = [
         title: 'Schedule Your Estimate',
         desc: "We'll arrange an in-person property visit at a time that works for you. We assess your space, discuss materials, and provide a detailed estimate — no surprises.",
         timeline: 'On-site estimate within 1–3 business days',
-        cta: 'Get A Quote',
-        href: '/#contact',
     },
     {
         num: 'III',
@@ -28,8 +24,6 @@ const STEPS = [
         title: 'Get The Job Done',
         desc: "After you approve the plan, we schedule your build and get to work. Our team handles everything — delivering the finished outdoor environment you envisioned.",
         timeline: 'Typical build: 2–8 weeks (weather permitting)',
-        cta: 'Get A Quote',
-        href: '/#contact',
     },
 ];
 
@@ -44,13 +38,13 @@ export default function Process() {
                     viewport={{ once: true, margin: '-80px' }}
                     transition={{ type: 'spring', stiffness: 80, damping: 20 }}
                 >
-                    <span className={styles.label}>The Journey</span>
-                    <h2 className={styles.headline}>Refined Precision</h2>
+                    <span className={styles.label}>How It Works</span>
+                    <h2 className={styles.headline}>From First Call to<br />Final Walkthrough</h2>
                     <div className={styles.vertLine} />
                 </motion.div>
 
                 <div className={styles.steps}>
-                    {STEPS.map(({ num, Icon, title, desc, timeline, cta, href }, i) => (
+                    {STEPS.map(({ num, Icon, title, desc, timeline }, i) => (
                         <motion.div
                             key={num}
                             className={styles.step}
@@ -68,12 +62,21 @@ export default function Process() {
                                 <Clock size={11} strokeWidth={2} />
                                 {timeline}
                             </div>
-                            <a href={href} className={styles.stepCta}>
-                                {cta} &rarr;
-                            </a>
                         </motion.div>
                     ))}
                 </div>
+
+                <motion.div
+                    className={styles.ctaRow}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ type: 'spring', stiffness: 80, damping: 20 }}
+                >
+                    <a href="/#contact" className={styles.stepCta}>
+                        Get A Quote &rarr;
+                    </a>
+                </motion.div>
             </div>
         </section>
     );
