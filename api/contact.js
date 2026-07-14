@@ -14,6 +14,14 @@
 
 import { validateLead, toE164 } from '../src/lib/leadValidation.js';
 
+const BUDGET_LABELS = {
+    'under-10k': 'Under $10,000',
+    '10k-25k': '$10,000 – $25,000',
+    '25k-50k': '$25,000 – $50,000',
+    '50k-100k': '$50,000 – $100,000',
+    '100k-250k+': '$100,000 – $250,000+',
+};
+
 const GHL_HEADERS = (key) => ({
     'Authorization': `Bearer ${key}`,
     'Content-Type': 'application/json',
@@ -45,10 +53,14 @@ export default async function handler(req, res) {
     const key = process.env.GHL_API_KEY;
     const locationId = process.env.GHL_LOCATION_ID;
 
+    const budgetLabel = BUDGET_LABELS[budget] || budget;
+
+    // GHL only persists custom fields referenced by id (key-based writes are
+    // silently ignored). Ids belong to this location, like the pipeline ids below.
     const customFields = [
-        { key: 'contact.project_type', field_value: projectType || '' },
-        { key: 'contact.estimated_budget', field_value: budget || '' },
-        { key: 'contact.project_message', field_value: message || '' },
+        { id: 'cGNxYeDpxfvty1mCn2ch', field_value: projectType },      // contact.project_type
+        { id: 'lYCUus1bCScDOaX9ImRB', field_value: budgetLabel },      // contact.estimated_budget
+        { id: '6EgA7Lbt7c0QsZS2echr', field_value: message || '' },    // contact.project_message
     ];
 
     const contactRes = await fetch('https://services.leadconnectorhq.com/contacts/', {
@@ -88,7 +100,7 @@ export default async function handler(req, res) {
             fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/notes`, {
                 method: 'POST',
                 headers: GHL_HEADERS(key),
-                body: JSON.stringify({ body: `Service: ${projectType}\nBudget: ${budget}\n\n${message}` }),
+                body: JSON.stringify({ body: `Service: ${projectType}\nBudget: ${budgetLabel}\n\n${message}` }),
             }),
             // Create opportunity in "New Website Lead" stage
             fetch('https://services.leadconnectorhq.com/opportunities/', {
