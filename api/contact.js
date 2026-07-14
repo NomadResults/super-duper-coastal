@@ -30,6 +30,9 @@ export default async function handler(req, res) {
     if (company) return res.status(200).json({ success: true });
 
     const errors = validateLead({ name, email, phone });
+    // Everything except the project description is mandatory
+    if (!(projectType || '').trim()) errors.projectType = 'Please select a project type.';
+    if (!(budget || '').trim()) errors.budget = 'Please select a budget range.';
     if (Object.keys(errors).length > 0) {
         return res.status(400).json({ error: 'Validation failed', fields: errors });
     }
