@@ -135,6 +135,13 @@
     transition: transform 0.2s ease;
 }
 
+/* External-link cue for the Financing link */
+.extIcon {
+    margin-left: 0.35rem;
+    opacity: 0.65;
+    vertical-align: middle;
+}
+
 .chevronOpen {
     transform: rotate(180deg);
 }

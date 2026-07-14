@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle } from 'lucide-react';
+import { Send, CheckCircle, ExternalLink } from 'lucide-react';
+import { FINANCING_LINK_PROPS } from '../data/financing';
+import { formatUSPhone, validateLead } from '../lib/leadValidation';
 import styles from './ContactForm.module.css';
 
 const PROJECT_TYPES = [
@@ -13,20 +15,43 @@ const PROJECT_TYPES = [
     'Other',
 ];
 
+const EMPTY = {
+    name: '', email: '', phone: '', projectType: '', budget: '', message: '',
+    company: '', // honeypot — hidden field real users never see
+};
+
 export default function ContactForm() {
-    const [form, setForm] = useState({
-        name: '', email: '', phone: '', projectType: '', budget: '', message: '',
-    });
+    const [form, setForm] = useState(EMPTY);
+    const [errors, setErrors] = useState({});
     const [submitting, setSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
     const [submitError, setSubmitError] = useState(false);
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setForm({ ...form, [name]: name === 'phone' ? formatUSPhone(value) : value });
+        if (errors[name]) setErrors({ ...errors, [name]: undefined });
+    };
+
+    // Validate a single field when the user leaves it — gentle, non-blocking
+    const handleBlur = (e) => {
+        const { name } = e.target;
+        const fieldError = validateLead(form)[name];
+        if (fieldError) setErrors({ ...errors, [name]: fieldError });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const validationErrors = validateLead(form);
+        if (!form.projectType) validationErrors.projectType = 'Please select a project type.';
+        if (!form.budget) validationErrors.budget = 'Please select a budget range.';
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            const firstInvalid = ['name', 'email', 'phone', 'projectType', 'budget']
+                .find((f) => validationErrors[f]);
+            document.getElementById(firstInvalid)?.focus();
+            return;
+        }
         setSubmitting(true);
         setSubmitError(false);
         try {
@@ -47,7 +72,8 @@ export default function ContactForm() {
     const reset = () => {
         setSuccess(false);
         setSubmitError(false);
-        setForm({ name: '', email: '', phone: '', projectType: '', budget: '', message: '' });
+        setErrors({});
+        setForm(EMPTY);
     };
 
     return (
@@ -68,6 +94,13 @@ export default function ContactForm() {
                     </h2>
                     <p className={styles.sectionSubtext}>
                         Limited design slots available each month. We respond within one business day.
+                    </p>
+                    <p className={styles.financingNote}>
+                        Flexible payment options beyond cash or check —{' '}
+                        <a {...FINANCING_LINK_PROPS} className={styles.financingLink}>
+                            explore financing
+                            <ExternalLink size={12} strokeWidth={2} />
+                        </a>
                     </p>
                 </motion.div>
 
@@ -94,42 +127,68 @@ export default function ContactForm() {
                             <button className={styles.resetBtn} onClick={reset}>Submit Another</button>
                         </motion.div>
                     ) : (
-                        <form onSubmit={handleSubmit} className={styles.form}>
+                        <form onSubmit={handleSubmit} className={styles.form} noValidate>
+                            <input
+                                type="text" name="company" tabIndex={-1} autoComplete="off"
+                                className={styles.honeypot} value={form.company} onChange={handleChange}
+                                aria-hidden="true"
+                            />
+
                             <div className={styles.row}>
                                 <div className={styles.field}>
                                     <label htmlFor="name" className={styles.fieldLabel}>Full Name</label>
-                                    <input id="name" name="name" type="text" required className={styles.input}
-                                        value={form.name} onChange={handleChange} placeholder="Frank Lloyd Wright" />
+                                    <input id="name" name="name" type="text" required
+                                        className={`${styles.input} ${errors.name ? styles.inputInvalid : ''}`}
+                                        value={form.name} onChange={handleChange} onBlur={handleBlur}
+                                        aria-invalid={!!errors.name}
+                                        aria-describedby={errors.name ? 'name-error' : undefined}
+                                        placeholder="Frank Lloyd Wright" />
+                                    {errors.name && <span id="name-error" className={styles.fieldError}>{errors.name}</span>}
                                 </div>
                                 <div className={styles.field}>
                                     <label htmlFor="email" className={styles.fieldLabel}>Email</label>
-                                    <input id="email" name="email" type="email" required className={styles.input}
-                                        value={form.email} onChange={handleChange} placeholder="flwright@gmail.com" />
+                                    <input id="email" name="email" type="email" required
+                                        className={`${styles.input} ${errors.email ? styles.inputInvalid : ''}`}
+                                        value={form.email} onChange={handleChange} onBlur={handleBlur}
+                                        aria-invalid={!!errors.email}
+                                        aria-describedby={errors.email ? 'email-error' : undefined}
+                                        placeholder="flwright@gmail.com" />
+                                    {errors.email && <span id="email-error" className={styles.fieldError}>{errors.email}</span>}
                                 </div>
                             </div>
 
                             <div className={styles.row}>
                                 <div className={styles.field}>
                                     <label htmlFor="phone" className={styles.fieldLabel}>Phone</label>
-                                    <input id="phone" name="phone" type="tel" className={styles.input}
-                                        value={form.phone} onChange={handleChange} placeholder="+1 (361) 316-5251" />
+                                    <input id="phone" name="phone" type="tel" required inputMode="tel"
+                                        className={`${styles.input} ${errors.phone ? styles.inputInvalid : ''}`}
+                                        value={form.phone} onChange={handleChange} onBlur={handleBlur}
+                                        aria-invalid={!!errors.phone}
+                                        aria-describedby={errors.phone ? 'phone-error' : undefined}
+                                        placeholder="(361) 316-5251" />
+                                    {errors.phone && <span id="phone-error" className={styles.fieldError}>{errors.phone}</span>}
                                 </div>
                                 <div className={styles.field}>
                                     <label htmlFor="projectType" className={styles.fieldLabel}>Project Type</label>
-                                    <select id="projectType" name="projectType" required className={styles.select}
-                                        value={form.projectType} onChange={handleChange}>
+                                    <select id="projectType" name="projectType" required
+                                        className={`${styles.select} ${errors.projectType ? styles.inputInvalid : ''}`}
+                                        value={form.projectType} onChange={handleChange}
+                                        aria-invalid={!!errors.projectType}>
                                         <option value="" disabled>Select type</option>
                                         {PROJECT_TYPES.map((t) => (
                                             <option key={t} value={t}>{t}</option>
                                         ))}
                                     </select>
+                                    {errors.projectType && <span className={styles.fieldError}>{errors.projectType}</span>}
                                 </div>
                             </div>
 
                             <div className={styles.field}>
                                 <label htmlFor="budget" className={styles.fieldLabel}>Estimated Budget</label>
-                                <select id="budget" name="budget" required className={styles.select}
-                                    value={form.budget} onChange={handleChange}>
+                                <select id="budget" name="budget" required
+                                    className={`${styles.select} ${errors.budget ? styles.inputInvalid : ''}`}
+                                    value={form.budget} onChange={handleChange}
+                                    aria-invalid={!!errors.budget}>
                                     <option value="" disabled>Select a range</option>
                                     <option value="under-10k">Under $10,000</option>
                                     <option value="10k-25k">$10,000 – $25,000</option>
@@ -137,6 +196,7 @@ export default function ContactForm() {
                                     <option value="50k-100k">$50,000 – $100,000</option>
                                     <option value="100k-250k+">$100,000 – $250,000+</option>
                                 </select>
+                                {errors.budget && <span className={styles.fieldError}>{errors.budget}</span>}
                             </div>
 
                             <div className={styles.field}>

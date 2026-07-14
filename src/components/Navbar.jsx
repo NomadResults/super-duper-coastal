@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown, ExternalLink } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { FINANCING_LINK_PROPS } from '../data/financing';
 import styles from './Navbar.module.css';
 
 const WHAT_WE_BUILD = [
@@ -27,6 +28,7 @@ const NAV_LINKS = [
     { label: 'What We Build', href: '/services', dropdown: WHAT_WE_BUILD },
     { label: 'Portfolio',     href: '/portfolio' },
     { label: 'Locations',     href: '/service-areas', dropdown: LOCATIONS },
+    { label: 'Careers',       href: '/careers' },
 ];
 
 function NavItem({ link, scrolled }) {
@@ -131,6 +133,10 @@ export default function Navbar() {
                     {NAV_LINKS.map((link) => (
                         <NavItem key={link.label} link={link} scrolled={scrolled} />
                     ))}
+                    <a {...FINANCING_LINK_PROPS} className={styles.navLink}>
+                        Financing
+                        <ExternalLink size={11} strokeWidth={2} className={styles.extIcon} />
+                    </a>
                 </nav>
 
                 {/* CTA + hamburger */}
@@ -212,6 +218,13 @@ export default function Navbar() {
                                     </motion.div>
                                 )}
                             </AnimatePresence>
+
+                            <a {...FINANCING_LINK_PROPS} className={styles.mobileLink} onClick={() => setMobileOpen(false)}>
+                                Financing
+                                <ExternalLink size={13} strokeWidth={2} className={styles.extIcon} />
+                            </a>
+
+                            <Link to="/careers" className={styles.mobileLink}>Careers</Link>
 
                             <a href="/#contact" className={styles.mobileCta} onClick={() => setMobileOpen(false)}>Schedule a Consultation</a>
                         </div>

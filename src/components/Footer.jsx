@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FINANCING_LINK_PROPS } from '../data/financing';
 import styles from './Footer.module.css';
 
 const locations = [
@@ -77,6 +78,9 @@ export default function Footer() {
                                     <Link to={svc.href} className={styles.listLink}>{svc.label}</Link>
                                 </li>
                             ))}
+                            <li>
+                                <a {...FINANCING_LINK_PROPS} className={styles.listLink}>Financing Available</a>
+                            </li>
                         </ul>
                     </div>
 
@@ -84,6 +88,9 @@ export default function Footer() {
                     <div>
                         <h6 className={styles.colLabel}>Connect</h6>
                         <ul className={styles.list}>
+                            <li>
+                                <Link to="/careers" className={styles.listLink}>Careers</Link>
+                            </li>
                             {social.map((s) => (
                                 <li key={s.label}>
                                     <a href={s.href} className={styles.listLink} target="_blank" rel="noopener noreferrer">{s.label}</a>
