@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
@@ -24,8 +24,7 @@ import OutdoorKitchens from './pages/OutdoorKitchens';
 import OutdoorLighting from './pages/OutdoorLighting';
 import Landscaping from './pages/Landscaping';
 import ArtificialTurf from './pages/ArtificialTurf';
-import Portfolio from './pages/Portfolio';
-import PortfolioCategory from './pages/PortfolioCategory';
+import VubaStone from './pages/VubaStone';
 import Careers from './pages/Careers';
 import OurStorySection from './components/OurStorySection';
 
@@ -48,6 +47,21 @@ function ScrollToTop() {
         }
     }, [location.pathname, location.hash]);
     return null;
+}
+
+// Old portfolio galleries were merged into their service pages; keep deep links alive.
+const PORTFOLIO_REDIRECTS = {
+    'hardscaping': '/services/stone-patios',
+    'landscaping': '/services/landscaping',
+    'outdoor-kitchens': '/services/outdoor-kitchens',
+    'turf': '/services/artificial-turf',
+    'lighting': '/services/outdoor-lighting',
+    'vuba-stone': '/vuba-stone',
+};
+
+function PortfolioRedirect() {
+    const { slug } = useParams();
+    return <Navigate to={PORTFOLIO_REDIRECTS[slug] ?? '/services'} replace />;
 }
 
 function HomePage() {
@@ -84,9 +98,10 @@ function App() {
                 <Route path="/services/outdoor-lighting" element={<OutdoorLighting />} />
                 <Route path="/services/landscaping" element={<Landscaping />} />
                 <Route path="/services/artificial-turf" element={<ArtificialTurf />} />
+                <Route path="/vuba-stone" element={<VubaStone />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/portfolio" element={<Portfolio />} />
-                <Route path="/portfolio/:slug" element={<PortfolioCategory />} />
+                <Route path="/portfolio" element={<Navigate to="/services" replace />} />
+                <Route path="/portfolio/:slug" element={<PortfolioRedirect />} />
                 <Route path="/careers" element={<Careers />} />
             </Routes>
             <Footer />

@@ -1,27 +1,13 @@
 import React, { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Send, CheckCircle, X } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import Seo from '../components/Seo';
+import InquiryForm from '../components/InquiryForm';
+import PhotoGallery from '../components/PhotoGallery';
 import styles from './ServicePage.module.css';
 
-const PROJECT_TYPES = [
-    'Stone Patio & Hardscaping',
-    'Outdoor Kitchen',
-    'Outdoor Lighting',
-    'Landscaping',
-    'Artificial Turf',
-    'Full Property Design-Build',
-    'Other',
-];
-
-const EMPTY_FORM = { name: '', email: '', phone: '', projectType: '', budget: '', message: '' };
-
-export default function ServicePage({ label, headline, body, ctaText, relatedServices = [], photos = [], seo }) {
+export default function ServicePage({ label, headline, body, ctaText, relatedServices = [], photos = [], defaultProjectType = '', seo }) {
     const [formOpen, setFormOpen] = useState(false);
-    const [form, setForm] = useState(EMPTY_FORM);
-    const [submitting, setSubmitting] = useState(false);
-    const [success, setSuccess] = useState(false);
-    const [submitError, setSubmitError] = useState(false);
     const formRef = useRef(null);
 
     const openForm = () => {
@@ -31,32 +17,9 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
         }, 60);
     };
 
-    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setSubmitting(true);
-        setSubmitError(false);
-        try {
-            const res = await fetch('/api/contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form),
-            });
-            if (!res.ok) throw new Error('Failed');
-            setSuccess(true);
-        } catch {
-            setSubmitError(true);
-        } finally {
-            setSubmitting(false);
-        }
-    };
-
-    const reset = () => { setSuccess(false); setSubmitError(false); setForm(EMPTY_FORM); };
-
     return (
         <main className={styles.page}>
-            {seo && <Seo {...seo} image={photos[0]} />}
+            {seo && <Seo {...seo} image={photos[0]?.img} />}
 
             {/* Hero */}
             <section className={styles.hero}>
@@ -107,132 +70,12 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
 
                             {/* Inline inquiry form */}
                             <div ref={formRef}>
-                                <AnimatePresence>
-                                    {formOpen && (
-                                        <motion.div
-                                            className={styles.inlineFormWrap}
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: 'auto', opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                                            style={{ overflow: 'hidden' }}
-                                        >
-                                            <div className={styles.inlineFormInner}>
-                                                <div className={styles.inlineFormHeader}>
-                                                    <div>
-                                                        <span className={styles.inlineFormEyebrow}>Start a Project</span>
-                                                        <h3 className={styles.inlineFormTitle}>{ctaText}</h3>
-                                                    </div>
-                                                    <button
-                                                        className={styles.closeBtn}
-                                                        onClick={() => setFormOpen(false)}
-                                                        aria-label="Close form"
-                                                    >
-                                                        <X size={18} strokeWidth={1.5} />
-                                                    </button>
-                                                </div>
-
-                                                {success ? (
-                                                    <div className={styles.successState}>
-                                                        <CheckCircle size={38} strokeWidth={1.5} className={styles.successIcon} />
-                                                        <h3 className={styles.successTitle}>Inquiry Received</h3>
-                                                        <p className={styles.successText}>
-                                                            We'll review your project details and be in touch within one business day.
-                                                        </p>
-                                                        <button className={styles.resetBtn} onClick={reset}>Submit Another</button>
-                                                    </div>
-                                                ) : (
-                                                    <form onSubmit={handleSubmit} className={styles.form}>
-                                                        <div className={styles.row}>
-                                                            <div className={styles.field}>
-                                                                <label htmlFor="svc-name" className={styles.fieldLabel}>Full Name</label>
-                                                                <input
-                                                                    id="svc-name" name="name" type="text" required
-                                                                    className={styles.input}
-                                                                    value={form.name} onChange={handleChange}
-                                                                    placeholder="Eloise Hartmann"
-                                                                />
-                                                            </div>
-                                                            <div className={styles.field}>
-                                                                <label htmlFor="svc-email" className={styles.fieldLabel}>Email</label>
-                                                                <input
-                                                                    id="svc-email" name="email" type="email" required
-                                                                    className={styles.input}
-                                                                    value={form.email} onChange={handleChange}
-                                                                    placeholder="eloise@example.com"
-                                                                />
-                                                            </div>
-                                                        </div>
-
-                                                        <div className={styles.row}>
-                                                            <div className={styles.field}>
-                                                                <label htmlFor="svc-phone" className={styles.fieldLabel}>Phone</label>
-                                                                <input
-                                                                    id="svc-phone" name="phone" type="tel"
-                                                                    className={styles.input}
-                                                                    value={form.phone} onChange={handleChange}
-                                                                    placeholder="+1 (361) 316-5251"
-                                                                />
-                                                            </div>
-                                                            <div className={styles.field}>
-                                                                <label htmlFor="svc-projectType" className={styles.fieldLabel}>Project Type</label>
-                                                                <select
-                                                                    id="svc-projectType" name="projectType" required
-                                                                    className={styles.select}
-                                                                    value={form.projectType} onChange={handleChange}
-                                                                >
-                                                                    <option value="" disabled>Select type</option>
-                                                                    {PROJECT_TYPES.map(t => (
-                                                                        <option key={t} value={t}>{t}</option>
-                                                                    ))}
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className={styles.field}>
-                                                            <label htmlFor="svc-budget" className={styles.fieldLabel}>Estimated Budget</label>
-                                                            <select
-                                                                id="svc-budget" name="budget" required
-                                                                className={styles.select}
-                                                                value={form.budget} onChange={handleChange}
-                                                            >
-                                                                <option value="" disabled>Select a range</option>
-                                                                <option value="under-10k">Under $10,000</option>
-                                                                <option value="10k-25k">$10,000 – $25,000</option>
-                                                                <option value="25k-50k">$25,000 – $50,000</option>
-                                                                <option value="50k-100k">$50,000 – $100,000</option>
-                                                                <option value="100k-250k+">$100,000 – $250,000+</option>
-                                                            </select>
-                                                        </div>
-
-                                                        <div className={styles.field}>
-                                                            <label htmlFor="svc-message" className={styles.fieldLabel}>Project Description</label>
-                                                            <textarea
-                                                                id="svc-message" name="message" rows={4}
-                                                                className={styles.textarea}
-                                                                value={form.message} onChange={handleChange}
-                                                                placeholder="Describe your site, goals, and any materials or styles you have in mind..."
-                                                            />
-                                                        </div>
-
-                                                        {submitError && (
-                                                            <p className={styles.errorLine}>
-                                                                Something went wrong — please call us at{' '}
-                                                                <a href="tel:+13613165251">(361) 316-5251</a>.
-                                                            </p>
-                                                        )}
-                                                        <button type="submit" className={styles.submitBtn} disabled={submitting}>
-                                                            {submitting
-                                                                ? <span className={styles.spinner} />
-                                                                : <><span>Submit Inquiry</span><Send size={14} strokeWidth={2} /></>
-                                                            }
-                                                        </button>
-                                                    </form>
-                                                )}
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                                <InquiryForm
+                                    open={formOpen}
+                                    onClose={() => setFormOpen(false)}
+                                    ctaText={ctaText}
+                                    defaultProjectType={defaultProjectType}
+                                />
                             </div>
                         </div>
 
@@ -267,26 +110,15 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
                 </div>
             </section>
 
-            {/* Photo grid */}
+            {/* Project gallery */}
             {photos.length > 0 && (
                 <section className={styles.photoSection}>
                     <div className="container">
-                        <div className={styles.photoGrid}>
-                            {photos.map((src, i) => (
-                                <motion.div
-                                    key={i}
-                                    className={`${styles.photoWrap} ${i === 0 ? styles.photoFeatured : ''}`}
-                                    initial={{ opacity: 0, y: 40, scale: 0.97 }}
-                                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                                    viewport={{ once: true, amount: 0.2 }}
-                                    transition={{ duration: 0.7, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                                    whileHover={{ scale: 1.025 }}
-                                >
-                                    <img src={src} alt={`${label} project ${i + 1}`} className={styles.photoImg} loading="lazy" />
-                                    <div className={styles.photoGlow} />
-                                </motion.div>
-                            ))}
+                        <div className={styles.photoHeader}>
+                            <span className={styles.photoEyebrow}>Our Work</span>
+                            <h2 className={styles.photoHeadline}>Recent {label.replace(/^Services — /, '')} Projects</h2>
                         </div>
+                        <PhotoGallery photos={photos} label={label} />
                     </div>
                 </section>
             )}

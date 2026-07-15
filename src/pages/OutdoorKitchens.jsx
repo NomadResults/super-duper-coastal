@@ -7,7 +7,7 @@ const related = [
     { name: 'Landscaping', href: '/services/landscaping' },
 ];
 
-const photos = CATEGORIES.find(c => c.slug === 'outdoor-kitchens')?.photos.map(p => p.img) ?? [];
+const photos = CATEGORIES.find(c => c.slug === 'outdoor-kitchens')?.photos ?? [];
 
 export default function OutdoorKitchens() {
     return (

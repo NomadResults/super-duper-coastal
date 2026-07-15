@@ -9,7 +9,7 @@ export default function ServicesPage() {
         <main className={styles.page}>
             <Seo
                 title="Outdoor Living Services in Corpus Christi, TX | Coast to Coast Landscape & Design"
-                description="Stone patios, outdoor kitchens, landscape lighting, landscaping, and artificial turf — one design-build team serving Corpus Christi and the Coastal Bend."
+                description="Stone patios, outdoor kitchens, landscape lighting, landscaping, artificial turf, and Vuba resin-bound stone — one design-build team serving Corpus Christi and the Coastal Bend."
                 path="/services"
             />
 
@@ -28,7 +28,7 @@ export default function ServicesPage() {
                             <em>Crafted for the Coast</em>
                         </h1>
                         <p className={styles.heroBody}>
-                            Five core services. One design-build philosophy. Every project is conceived with architectural precision and built to perform in South Texas conditions for decades.
+                            Six core services. One design-build philosophy. Every project is conceived with architectural precision and built to perform in South Texas conditions for decades.
                         </p>
                     </motion.div>
                 </div>

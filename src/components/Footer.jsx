@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FINANCING_LINK_PROPS } from '../data/financing';
 import styles from './Footer.module.css';
 
 const locations = [
@@ -18,6 +17,7 @@ const services = [
     { label: 'Outdoor Kitchens',     href: '/services/outdoor-kitchens' },
     { label: 'Outdoor Lighting',     href: '/services/outdoor-lighting' },
     { label: 'Artificial Turf',      href: '/services/artificial-turf' },
+    { label: 'Vuba Stone',           href: '/vuba-stone' },
 ];
 const social = [
     { label: 'Instagram', href: 'https://www.instagram.com/coast2coastld/' },
@@ -78,9 +78,6 @@ export default function Footer() {
                                     <Link to={svc.href} className={styles.listLink}>{svc.label}</Link>
                                 </li>
                             ))}
-                            <li>
-                                <a {...FINANCING_LINK_PROPS} className={styles.listLink}>Financing Available</a>
-                            </li>
                         </ul>
                     </div>
 

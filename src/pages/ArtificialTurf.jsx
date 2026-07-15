@@ -6,7 +6,7 @@ const related = [
     { name: 'Stone Patios & Hardscaping', href: '/services/stone-patios' },
 ];
 
-const photos = CATEGORIES.find(c => c.slug === 'turf')?.photos.map(p => p.img) ?? [];
+const photos = CATEGORIES.find(c => c.slug === 'turf')?.photos ?? [];
 
 export default function ArtificialTurf() {
     return (

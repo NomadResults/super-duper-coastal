@@ -4,10 +4,10 @@ import { CATEGORIES } from '../data/portfolioData';
 const related = [
     { name: 'Outdoor Kitchens', href: '/services/outdoor-kitchens' },
     { name: 'Outdoor Lighting', href: '/services/outdoor-lighting' },
-    { name: 'Landscaping', href: '/services/landscaping' },
+    { name: 'Vuba Stone (Resin-Bound)', href: '/vuba-stone' },
 ];
 
-const photos = CATEGORIES.find(c => c.slug === 'hardscaping')?.photos.map(p => p.img) ?? [];
+const photos = CATEGORIES.find(c => c.slug === 'hardscaping')?.photos ?? [];
 
 export default function StonePatios() {
     return (

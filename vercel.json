@@ -1,6 +1,14 @@
 {
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "redirects": [
+    { "source": "/portfolio", "destination": "/services", "permanent": true },
+    { "source": "/portfolio/hardscaping", "destination": "/services/stone-patios", "permanent": true },
+    { "source": "/portfolio/landscaping", "destination": "/services/landscaping", "permanent": true },
+    { "source": "/portfolio/outdoor-kitchens", "destination": "/services/outdoor-kitchens", "permanent": true },
+    { "source": "/portfolio/turf", "destination": "/services/artificial-turf", "permanent": true },
+    { "source": "/portfolio/lighting", "destination": "/services/outdoor-lighting", "permanent": true },
+    { "source": "/portfolio/:slug", "destination": "/services", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

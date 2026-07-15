@@ -60,7 +60,7 @@ export default function Hero() {
 
                     <motion.div variants={item} className={styles.ctaRow}>
                         <a href="#contact" className={styles.ctaBtn}>Request a Consultation</a>
-                        <a href="/portfolio" className={styles.ctaBtnGhost}>See Our Work</a>
+                        <a href="/services" className={styles.ctaBtnGhost}>See Our Work</a>
                     </motion.div>
 
                     <motion.div variants={item} className={styles.reviewBadge}>

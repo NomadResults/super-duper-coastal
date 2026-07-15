@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle, ExternalLink } from 'lucide-react';
-import { FINANCING_LINK_PROPS } from '../data/financing';
+import { Send, CheckCircle } from 'lucide-react';
 import { formatUSPhone, validateLead } from '../lib/leadValidation';
 import styles from './ContactForm.module.css';
 
@@ -11,6 +10,7 @@ const PROJECT_TYPES = [
     'Outdoor Lighting',
     'Landscaping',
     'Artificial Turf',
+    'Vuba Stone (Resin-Bound Surfacing)',
     'Full Property Design-Build',
     'Other',
 ];
@@ -94,13 +94,6 @@ export default function ContactForm() {
                     </h2>
                     <p className={styles.sectionSubtext}>
                         Limited design slots available each month. We respond within one business day.
-                    </p>
-                    <p className={styles.financingNote}>
-                        Flexible payment options beyond cash or check —{' '}
-                        <a {...FINANCING_LINK_PROPS} className={styles.financingLink}>
-                            explore financing
-                            <ExternalLink size={12} strokeWidth={2} />
-                        </a>
                     </p>
                 </motion.div>
 

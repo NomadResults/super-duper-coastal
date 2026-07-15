@@ -52,6 +52,15 @@ export const SERVICES = [
         href: '/services/artificial-turf',
         image: coverOf('turf'),
     },
+    {
+        id: '06',
+        title: 'Vuba Stone',
+        tagline: 'Certified Resin-Bound Surfacing',
+        description:
+            "Seamless resin-bound stone for pool decks, driveways, and patios — fully permeable, UV-stable, and installed by our Vuba-certified team. A standalone service and one of the most requested premium surfaces on the coast.",
+        href: '/vuba-stone',
+        image: coverOf('vuba-stone'),
+    },
 ];
 
 const containerVariants = {
@@ -91,7 +100,7 @@ export default function ServicesSection({ showHeader = true, showCta = true }) {
                                 <em>Crafted for the Coast</em>
                             </h2>
                             <p className={styles.sectionBody}>
-                                Five core services. One design-build philosophy. Every project is conceived with architectural precision and built to perform in South Texas conditions for decades.
+                                Six core services. One design-build philosophy. Every project is conceived with architectural precision and built to perform in South Texas conditions for decades.
                             </p>
                         </motion.div>
                     </div>

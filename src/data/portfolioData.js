@@ -44,6 +44,16 @@ export const CATEGORIES = [
         ],
     },
     {
+        slug: 'vuba-stone',
+        label: 'Vuba Stone',
+        // TODO: replace cover with a real Vuba job photo once uploaded to the CDN;
+        // temporary stand-in so the home services card has an image.
+        cover: cdn('https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69f8ddee273a62411d7daad8.jpeg'),
+        // Add completed Vuba installs here as { img: cdn('...'), title: '...' } —
+        // the gallery on /vuba-stone renders automatically once photos exist.
+        photos: [],
+    },
+    {
         slug: 'lighting',
         label: 'Outdoor Lighting',
         cover: cdn('https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69fa0b407167fd9a35845675.png'),

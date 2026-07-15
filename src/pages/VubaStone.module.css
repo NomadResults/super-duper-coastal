@@ -1,0 +1,708 @@
+/* ── Page wrapper ── */
+.page {
+    padding-top: 80px;
+}
+
+/* ── Hero ── */
+.hero {
+    background-color: var(--navy);
+    padding: 7rem 0 5.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    left: -6rem;
+    bottom: -6rem;
+    width: 32rem;
+    height: 32rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,168,96,0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.heroInner {
+    max-width: 900px;
+}
+
+.certChip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    border: 1px solid rgba(196, 168, 96, 0.4);
+    background: rgba(196, 168, 96, 0.08);
+    padding: 0.5rem 1rem;
+    margin-bottom: 2rem;
+}
+
+.label {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: rgba(196, 168, 96, 0.6);
+    margin-bottom: 1.25rem;
+}
+
+.headline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+    font-weight: 300;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+}
+
+.headline em {
+    font-style: italic;
+    color: var(--accent-bright);
+}
+
+.heroBody {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    font-weight: 300;
+    color: var(--text-on-navy);
+    line-height: 1.8;
+    max-width: 62ch;
+    margin: 1.75rem 0 2.5rem;
+}
+
+.heroCta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background-color: var(--accent-bright);
+    border: none;
+    padding: 1.1rem 2.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.heroCta:hover {
+    background-color: #ffffff;
+}
+
+/* ── Gold rule ── */
+.goldRule {
+    height: 2px;
+    background: linear-gradient(to right, var(--accent-bright), transparent);
+}
+
+/* ── Shared section header bits ── */
+.eyebrow {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+}
+
+.sectionHeadline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    margin-bottom: 1.75rem;
+}
+
+.sectionHeadline em {
+    font-style: italic;
+    color: var(--accent);
+}
+
+.sectionHeader {
+    max-width: 640px;
+    margin-bottom: 2.75rem;
+}
+
+/* ── Intro ── */
+.introSection {
+    background-color: var(--bg);
+}
+
+.introGrid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 6rem;
+    align-items: start;
+}
+
+.para {
+    font-size: clamp(1rem, 1.6vw, 1.12rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.88;
+    margin-bottom: 1.75rem;
+}
+
+.para:last-of-type {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-primary);
+    border-left: 2px solid var(--accent-bright);
+    padding-left: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background-color: var(--accent-bright);
+    border: none;
+    padding: 1rem 2.25rem;
+    width: fit-content;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.cta:hover {
+    background-color: var(--navy);
+    color: var(--accent-bright);
+}
+
+/* ── Sidebar ── */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    position: sticky;
+    top: 100px;
+}
+
+.sideCard {
+    border: 1px solid var(--border);
+    padding: 1.75rem 1.5rem;
+    background-color: var(--bg-secondary);
+}
+
+.sideCardCert {
+    border-color: var(--border-gold);
+    background: linear-gradient(160deg, rgba(196, 168, 96, 0.10) 0%, var(--bg-secondary) 60%);
+}
+
+.sideCertIcon {
+    color: var(--accent);
+    margin-bottom: 0.9rem;
+}
+
+.sideCertText {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.sideLabel {
+    display: block;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+}
+
+.sideCardCert .sideLabel {
+    margin-bottom: 0.75rem;
+}
+
+.sideList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.sideItem {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    padding: 0.2rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.sideItem:last-child {
+    border-bottom: none;
+}
+
+.sideLink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s ease;
+}
+
+.sideLink:hover {
+    color: var(--navy);
+}
+
+/* ── Benefits ── */
+.benefitsSection {
+    background-color: var(--bg-secondary);
+    padding: 5.5rem 0 6rem;
+}
+
+.benefitsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.benefitCard {
+    background-color: var(--bg);
+    border: 1px solid var(--border);
+    padding: 2rem 1.75rem;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.benefitCard:hover {
+    border-color: var(--border-gold);
+    box-shadow: var(--shadow-md);
+}
+
+.benefitIcon {
+    color: var(--accent);
+    margin-bottom: 1.1rem;
+}
+
+.benefitTitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.01em;
+}
+
+.benefitText {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.75;
+}
+
+/* ── Certification band ── */
+.certBand {
+    background-color: var(--navy);
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.certBand::after {
+    content: '';
+    position: absolute;
+    right: -8rem;
+    top: -8rem;
+    width: 36rem;
+    height: 36rem;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,168,96,0.07) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.certInner {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.certIcon {
+    color: var(--accent-bright);
+    margin-bottom: 1.5rem;
+}
+
+.certEyebrow {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 1rem;
+}
+
+.certHeadline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.7rem, 3.2vw, 2.7rem);
+    font-weight: 300;
+    color: #ffffff;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+}
+
+.certHeadline em {
+    font-style: italic;
+    color: var(--accent-bright);
+}
+
+.certBody {
+    font-size: 0.98rem;
+    font-weight: 300;
+    color: var(--text-on-navy);
+    line-height: 1.85;
+}
+
+/* ── Applications ── */
+.appsSection {
+    background-color: var(--bg);
+    padding: 5.5rem 0 6rem;
+}
+
+.appsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+}
+
+.appCard {
+    border-top: 2px solid var(--border-gold);
+    padding: 1.5rem 0 0;
+}
+
+.appNum {
+    display: block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+}
+
+.appTitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.45rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+.appText {
+    font-size: 0.88rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* ── Blends & colors ── */
+.blendsSection {
+    background-color: var(--bg-secondary);
+    padding: 5.5rem 0 6rem;
+}
+
+.blendsIntro {
+    font-size: 0.98rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    max-width: 62ch;
+}
+
+.blendsGrid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.25rem;
+}
+
+.blendCard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.blendImgWrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    background-color: var(--bg);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.blendCard:hover .blendImgWrap {
+    border-color: var(--border-gold);
+    box-shadow:
+        0 0 0 1px rgba(196, 168, 96, 0.35),
+        0 6px 28px rgba(196, 168, 96, 0.18);
+}
+
+.blendImg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.blendCard:hover .blendImg {
+    transform: scale(1.06);
+}
+
+.blendName {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.98rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    text-align: center;
+}
+
+.blendsFootnote {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2.75rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+.blendsFootnoteText {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-primary);
+    max-width: 52ch;
+}
+
+.blendsCta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background-color: var(--accent-bright);
+    border: none;
+    padding: 1rem 2.25rem;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.blendsCta:hover {
+    background-color: var(--navy);
+    color: var(--accent-bright);
+}
+
+/* ── Gallery ── */
+.photoSection {
+    background-color: var(--bg-secondary);
+    padding: 5rem 0 6rem;
+}
+
+/* ── FAQ ── */
+.faqSection {
+    background-color: var(--bg);
+    padding: 5.5rem 0 6.5rem;
+}
+
+.faqGrid {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.faqList {
+    border-top: 1px solid var(--border);
+}
+
+.faqItem {
+    border-bottom: 1px solid var(--border);
+}
+
+.faqQuestion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 1.4rem 0;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+}
+
+.faqQuestion:hover {
+    color: var(--accent);
+}
+
+.faqChevron {
+    flex-shrink: 0;
+    color: var(--accent);
+    transition: transform 0.25s ease;
+}
+
+.faqChevronOpen {
+    transform: rotate(180deg);
+}
+
+.faqAnswer {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    padding: 0 0 1.6rem;
+    max-width: 68ch;
+}
+
+/* ── CTA band ── */
+.ctaBand {
+    background-color: var(--navy);
+    padding: 6rem 0;
+}
+
+.ctaInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.ctaEyebrow {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: var(--accent-bright);
+    margin-bottom: 0.75rem;
+}
+
+.ctaHeadline {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+
+.ctaHeadline em {
+    font-style: italic;
+    color: var(--accent-bright);
+}
+
+.ctaBtn {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background-color: var(--accent-bright);
+    border: none;
+    padding: 1.1rem 2.75rem;
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.ctaBtn:hover {
+    background-color: #ffffff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .benefitsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .appsGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem 1.5rem;
+    }
+    .blendsGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .introGrid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .sidebar {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .sideCard { flex: 1; min-width: 240px; }
+    .hero { padding: 5rem 0 4rem; }
+    .faqGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .benefitsGrid {
+        grid-template-columns: 1fr;
+    }
+    .appsGrid {
+        grid-template-columns: 1fr;
+    }
+    .blendsGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    .blendsSection { padding: 4rem 0 4.5rem; }
+    .blendsFootnote { flex-direction: column; align-items: flex-start; }
+    .sidebar { flex-direction: column; }
+    .ctaInner { flex-direction: column; align-items: flex-start; }
+    .ctaBand { padding: 4rem 0; }
+    .certBand { padding: 4.5rem 0; }
+    .benefitsSection,
+    .appsSection,
+    .faqSection { padding: 4rem 0 4.5rem; }
+    .photoSection { padding: 3.5rem 0 4rem; }
+}
