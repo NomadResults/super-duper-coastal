@@ -6,18 +6,6 @@
     padding-bottom: 4rem;
 }
 
-/* Subtle center vertical ruled line */
-.section::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background-color: rgba(196, 168, 96, 0.15);
-    pointer-events: none;
-}
-
 /* Centered header */
 .header {
     text-align: center;
@@ -143,8 +131,6 @@
 }
 
 @media (max-width: 900px) {
-    .section::before { display: none; }
-
     .steps {
         grid-template-columns: 1fr;
     }
