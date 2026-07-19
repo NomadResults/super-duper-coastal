@@ -1,0 +1,9 @@
+# Known spam numbers — one per line, any format (dashes/parens/+1 all fine).
+# Lines starting with # are ignored. blacklist.js matches on the last 10 digits.
+#
+# Add every number from the "Google Business listing" robocalls here as they
+# come in — copy them from Conversations → the call entry → contact phone.
+#
+# Example (delete this line and add real ones):
+# (512) 555-0184
+(512) 555-0184
