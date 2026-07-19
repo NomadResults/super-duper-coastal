@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, ArrowRight, Send, CheckCircle, X } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
 import styles from './AreaDetailPage.module.css';
 
 const PROJECT_TYPES = [
@@ -39,6 +40,10 @@ const areaData = {
             region: 'TX',
             postalCode: '78401',
         },
+        faqLocal: {
+            q: 'Which parts of Corpus Christi do you work in?',
+            a: "All of them. Our work spans Southside estates, Padre Island and waterfront properties, bayfront homes, and established neighborhoods across the city — Corpus Christi is where the company is based and where most of our projects live.",
+        },
     },
     'rockport': {
         name: 'Rockport',
@@ -60,6 +65,10 @@ const areaData = {
             locality: 'Rockport',
             region: 'TX',
             postalCode: '78382',
+        },
+        faqLocal: {
+            q: 'Can you design for salt air and Gulf wind in Rockport?',
+            a: "That's exactly what we design for. Rockport projects get materials that handle salt exposure, plant selections suited to the coastal climate, and hardscape systems with the durability Gulf conditions demand — engineered for the coast from the first sketch.",
         },
     },
     'port-aransas': {
@@ -83,6 +92,10 @@ const areaData = {
             region: 'TX',
             postalCode: '78373',
         },
+        faqLocal: {
+            q: 'Do you work on vacation rentals in Port Aransas?',
+            a: "Yes — vacation rental owners and second-home buyers are a big part of our Port Aransas work. Island properties get durable, low-maintenance outdoor spec: hardscape and plantings that handle salt, wind, and humidity between visits without constant upkeep.",
+        },
     },
     'portland': {
         name: 'Portland',
@@ -104,6 +117,10 @@ const areaData = {
             locality: 'Portland',
             region: 'TX',
             postalCode: '78374',
+        },
+        faqLocal: {
+            q: 'Do you handle outdoor spaces for new builds in Portland?',
+            a: "Yes — both upgrades to existing outdoor spaces and from-scratch designs on new construction. We handle the full scope: design consultation, material selection, installation, and ongoing maintenance.",
         },
     },
     'ingleside': {
@@ -127,6 +144,10 @@ const areaData = {
             region: 'TX',
             postalCode: '78362',
         },
+        faqLocal: {
+            q: 'Do you take on smaller backyard projects in Ingleside?',
+            a: "Yes. Ingleside work ranges from backyard renovations to full outdoor environment buildouts, and every project — regardless of size — gets the same process: thorough site analysis, materials suited to the environment, and an installation built to last.",
+        },
     },
     'calallen': {
         name: 'Calallen',
@@ -148,6 +169,10 @@ const areaData = {
             locality: 'Calallen',
             region: 'TX',
             postalCode: '78410',
+        },
+        faqLocal: {
+            q: 'What kind of projects do you do in Calallen?',
+            a: "Full-scope outdoor environments that match the scale of Calallen homes: stone patios and hardscape, custom landscape design, outdoor kitchens, and lighting systems — usually designed together so the whole property reads as one intentional space.",
         },
     },
     'flour-bluff': {
@@ -171,8 +196,15 @@ const areaData = {
             region: 'TX',
             postalCode: '78418',
         },
+        faqLocal: {
+            q: 'Does Flour Bluff count as coastal for material and plant selection?',
+            a: "We treat it that way. Flour Bluff sits between the city and the island, so designs here get salt-tolerant materials, plants suited to coastal exposure, and drainage engineered for storm season — the same coastal-conscious approach we use on the island itself.",
+        },
     },
 };
+
+// Consumed by the prerender build (scripts/prerender.mjs) to emit one static page per area
+export const areaSlugs = Object.keys(areaData);
 
 const allServices = [
     { label: 'Hardscaping',      href: '/services/stone-patios' },
@@ -226,22 +258,20 @@ export default function AreaDetailPage() {
 
     const canonicalUrl = `${SITE_URL}/service-areas/${slug}`;
 
-    // Local Business JSON-LD schema
+    // Service JSON-LD; full business details (address, sameAs) live on the
+    // global LocalBusiness schema in index.html, referenced here by @id.
     const jsonLd = {
         '@context': 'https://schema.org',
-        '@type': 'LocalBusiness',
-        name: 'Coast to Coast Landscape & Design',
+        '@type': 'Service',
+        name: `Landscape & Hardscape Design in ${area.name}, TX`,
         description: area.metaDesc,
         url: canonicalUrl,
-        telephone: '+13613165251',
         image: `${SITE_URL}${area.photo}`,
-        address: {
-            '@type': 'PostalAddress',
-            streetAddress: '201 16th St',
-            addressLocality: area.schema.locality,
-            addressRegion: area.schema.region,
-            postalCode: area.schema.postalCode,
-            addressCountry: 'US',
+        provider: {
+            '@type': 'LocalBusiness',
+            '@id': `${SITE_URL}/#business`,
+            name: 'Coast to Coast Landscape & Design, LLC',
+            telephone: '+13613165251',
         },
         areaServed: {
             '@type': 'City',
@@ -264,12 +294,23 @@ export default function AreaDetailPage() {
                 },
             })),
         },
-        sameAs: [
-            'https://www.instagram.com/coast2coastld/',
-            'https://www.facebook.com/profile.php?id=61565415870458',
-            'https://share.google/9SoFK4YIhQsiAXAE0',
-        ],
     };
+
+    const faqs = [
+        {
+            q: `Do you offer landscaping and hardscape services in ${area.name}, TX?`,
+            a: `Yes — ${area.name} is one of our core service areas. We design and install ${area.services.join(', ').toLowerCase()} for ${area.name} properties, with materials and plant selections chosen for local conditions.`,
+        },
+        area.faqLocal,
+        {
+            q: `How much does a landscape or hardscape project cost in ${area.name}?`,
+            a: `It depends on scope: square footage, materials, and site preparation drive most of the cost. Every project is custom-designed, so we price from an on-site consultation at your ${area.name} property rather than a flat rate — call ${PHONE} to schedule one.`,
+        },
+        {
+            q: 'How do I get started?',
+            a: `Call ${PHONE} or send your project details through the form on this page. We'll walk the property with you at an on-site design consultation, then follow up with a design and a detailed proposal.`,
+        },
+    ].filter(Boolean);
 
     return (
         <>
@@ -516,6 +557,11 @@ export default function AreaDetailPage() {
                 </section>
 
                 {/* CTA Band */}
+                <FaqSection
+                    headline={<>{area.name}, <em>Answered</em></>}
+                    items={faqs}
+                />
+
                 <section className={styles.ctaBand} aria-label="Call to action">
                     <div className="container">
                         <div className={styles.ctaInner}>

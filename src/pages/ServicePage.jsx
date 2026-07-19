@@ -4,9 +4,14 @@ import { ArrowRight } from 'lucide-react';
 import Seo from '../components/Seo';
 import InquiryForm from '../components/InquiryForm';
 import PhotoGallery from '../components/PhotoGallery';
+import JsonLd from '../components/JsonLd';
+import FaqSection from '../components/FaqSection';
 import styles from './ServicePage.module.css';
 
-export default function ServicePage({ label, headline, body, ctaText, relatedServices = [], photos = [], defaultProjectType = '', seo }) {
+const SITE_URL = 'https://www.coast2coastlandscapes.com';
+const SERVICE_AREAS = ['Corpus Christi', 'Rockport', 'Port Aransas', 'Portland', 'Ingleside', 'Calallen', 'Flour Bluff'];
+
+export default function ServicePage({ label, headline, body, ctaText, relatedServices = [], photos = [], defaultProjectType = '', seo, serviceType, faqs = [] }) {
     const [formOpen, setFormOpen] = useState(false);
     const formRef = useRef(null);
 
@@ -20,6 +25,20 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
     return (
         <main className={styles.page}>
             {seo && <Seo {...seo} image={photos[0]?.img} />}
+            {serviceType && seo && (
+                <JsonLd
+                    data={{
+                        '@context': 'https://schema.org',
+                        '@type': 'Service',
+                        serviceType,
+                        name: headline,
+                        description: seo.description,
+                        url: `${SITE_URL}${seo.path}`,
+                        provider: { '@id': `${SITE_URL}/#business` },
+                        areaServed: SERVICE_AREAS.map((city) => ({ '@type': 'City', name: `${city}, TX` })),
+                    }}
+                />
+            )}
 
             {/* Hero */}
             <section className={styles.hero}>
@@ -84,7 +103,7 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
                             <div className={styles.sideCard}>
                                 <span className={styles.sideLabel}>Service Areas</span>
                                 <ul className={styles.sideList}>
-                                    {['Corpus Christi', 'Rockport', 'Port Aransas', 'Portland', 'Ingleside', 'Calallen', 'Flour Bluff'].map(area => (
+                                    {SERVICE_AREAS.map(area => (
                                         <li key={area} className={styles.sideItem}>{area}</li>
                                     ))}
                                 </ul>
@@ -122,6 +141,8 @@ export default function ServicePage({ label, headline, body, ctaText, relatedSer
                     </div>
                 </section>
             )}
+
+            <FaqSection items={faqs} />
 
             {/* Navy CTA band */}
             <section className={styles.ctaBand}>

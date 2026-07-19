@@ -9,6 +9,25 @@ const related = [
 
 const photos = CATEGORIES.find(c => c.slug === 'landscaping')?.photos ?? [];
 
+const faqs = [
+    {
+        q: 'What plants work best for landscaping in Corpus Christi?',
+        a: "Native and adaptive species that can handle South Texas heat, periodic drought, and — near the water — salt exposure. We design plant palettes around what actually thrives here long-term, not what looks good on installation day and dies by August.",
+    },
+    {
+        q: 'How is coastal landscaping different from landscaping anywhere else?',
+        a: "Three things: soil, salt, and storms. Coastal Bend soil and drainage behave differently than inland Texas, salt air limits plant and material choices near the water, and every design has to assume tropical downpours. We engineer for all three from the first sketch.",
+    },
+    {
+        q: 'Do you handle drainage and irrigation as part of a landscape design?',
+        a: "Yes. Drainage solutions and irrigation-smart layouts are built into every design — a landscape that floods in storm season or needs constant hand-watering in summer wasn't designed for South Texas, no matter how it looks.",
+    },
+    {
+        q: 'Do you work on commercial properties or just homes?',
+        a: 'Both. We design and install landscape systems for residential and commercial properties across the Coastal Bend, with the same design rigor either way.',
+    },
+];
+
 export default function Landscaping() {
     return (
         <ServicePage
@@ -22,6 +41,8 @@ export default function Landscaping() {
             ctaText="Request a Consultation"
             relatedServices={related}
             photos={photos}
+            serviceType="Landscape Design & Installation"
+            faqs={faqs}
             seo={{
                 title: 'Landscaping Services in Corpus Christi, TX | Coast to Coast Landscape & Design',
                 description: 'Full-service landscape design and installation for the Coastal Bend — native plantings, structured beds, drainage, and irrigation-smart layouts built for South Texas.',

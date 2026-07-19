@@ -9,6 +9,25 @@ const related = [
 
 const photos = CATEGORIES.find(c => c.slug === 'lighting')?.photos ?? [];
 
+const faqs = [
+    {
+        q: 'What kind of landscape lighting do you install?',
+        a: "Low-voltage architectural lighting systems: uplighting for trees and facades, path lighting, accent fixtures, and smart controls. The goal is a property that feels as intentional after dark as it does during the day.",
+    },
+    {
+        q: 'Will the fixtures survive coastal salt air?',
+        a: "That's a core requirement of every system we install. Fixtures and hardware are selected specifically to hold up in the coastal salt-air environment of Corpus Christi and the Coastal Bend, where standard fixtures corrode quickly.",
+    },
+    {
+        q: 'Can I control my landscape lighting from my phone?',
+        a: "Yes — we install smart controls that let you schedule scenes, adjust zones, and run everything from your phone. Lighting that turns itself on at dusk and off at bedtime is the default, not an upgrade.",
+    },
+    {
+        q: 'Is low-voltage lighting expensive to run?',
+        a: "No. Low-voltage LED systems draw a small fraction of the power of old line-voltage lighting, so a full-property system costs very little to operate — the investment is in the design and installation, not the utility bill.",
+    },
+];
+
 export default function OutdoorLighting() {
     return (
         <ServicePage
@@ -22,6 +41,8 @@ export default function OutdoorLighting() {
             ctaText="Schedule a Consultation"
             relatedServices={related}
             photos={photos}
+            serviceType="Landscape Lighting Design & Installation"
+            faqs={faqs}
             seo={{
                 title: 'Landscape Lighting in Corpus Christi, TX | Coast to Coast Landscape & Design',
                 description: 'Low-voltage architectural landscape lighting for Corpus Christi and the Coastal Bend — uplighting, path lighting, and smart controls built for coastal salt air.',

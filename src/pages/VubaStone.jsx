@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowRight, ShieldCheck, Droplets, Sun, Waves, Footprints, Sparkles, Layers, ChevronDown } from 'lucide-react';
 import Seo from '../components/Seo';
+import JsonLd from '../components/JsonLd';
 import InquiryForm from '../components/InquiryForm';
 import PhotoGallery from '../components/PhotoGallery';
 import { CATEGORIES } from '../data/portfolioData';
@@ -84,19 +85,15 @@ function FaqItem({ faq, open, onToggle }) {
                 <span>{faq.q}</span>
                 <ChevronDown size={16} strokeWidth={2} className={`${styles.faqChevron} ${open ? styles.faqChevronOpen : ''}`} />
             </button>
-            <AnimatePresence initial={false}>
-                {open && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                        style={{ overflow: 'hidden' }}
-                    >
-                        <p className={styles.faqAnswer}>{faq.a}</p>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Answer stays mounted when closed so prerendered HTML carries the full Q&A for crawlers */}
+            <motion.div
+                initial={false}
+                animate={{ height: open ? 'auto' : 0, opacity: open ? 1 : 0 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                style={{ overflow: 'hidden' }}
+            >
+                <p className={styles.faqAnswer}>{faq.a}</p>
+            </motion.div>
         </div>
     );
 }
@@ -120,6 +117,31 @@ export default function VubaStone() {
                 description="Resin-bound Vuba Stone surfacing for pool decks, driveways, walkways, and patios — permeable, UV-stable, and seamless. Certified installation across Corpus Christi and the Coastal Bend."
                 path="/vuba-stone"
                 image={photos[0]?.img}
+            />
+            <JsonLd
+                data={{
+                    '@context': 'https://schema.org',
+                    '@type': 'Service',
+                    serviceType: 'Vuba Stone Resin-Bound Surfacing',
+                    name: 'Certified Vuba Stone Installation',
+                    description: 'Resin-bound Vuba Stone surfacing for pool decks, driveways, walkways, and patios — permeable, UV-stable, and seamless. Installed by a Vuba-certified team.',
+                    url: 'https://www.coast2coastlandscapes.com/vuba-stone',
+                    provider: { '@id': 'https://www.coast2coastlandscapes.com/#business' },
+                    areaServed: ['Corpus Christi', 'Rockport', 'Port Aransas', 'Portland', 'Ingleside', 'Calallen', 'Flour Bluff'].map(
+                        (city) => ({ '@type': 'City', name: `${city}, TX` }),
+                    ),
+                }}
+            />
+            <JsonLd
+                data={{
+                    '@context': 'https://schema.org',
+                    '@type': 'FAQPage',
+                    mainEntity: FAQS.map(({ q, a }) => ({
+                        '@type': 'Question',
+                        name: q,
+                        acceptedAnswer: { '@type': 'Answer', text: a },
+                    })),
+                }}
             />
 
             {/* ── Hero ── */}
