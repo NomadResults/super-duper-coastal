@@ -1,5 +1,7 @@
 {
+  "trailingSlash": false,
   "redirects": [
+    { "source": "/jobs", "destination": "/careers", "permanent": false },
     { "source": "/portfolio", "destination": "/services", "permanent": true },
     { "source": "/portfolio/hardscaping", "destination": "/services/stone-patios", "permanent": true },
     { "source": "/portfolio/landscaping", "destination": "/services/landscaping", "permanent": true },

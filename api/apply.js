@@ -24,11 +24,11 @@ export default async function handler(req, res) {
     const {
         name, phone, email, role, experience,
         license, transportation, workAuth, availability,
-        resumeLink, about, company, // `company` = honeypot
+        resumeLink, about, smsConsent, attribution, hpField, // `hpField` = honeypot
     } = req.body || {};
 
     // Honeypot — real users never fill this hidden field.
-    if (company) return res.status(200).json({ success: true });
+    if (hpField) return res.status(200).json({ success: true });
 
     const errors = validateLead({ name, email, phone });
     if (Object.keys(errors).length > 0) {
@@ -49,6 +49,12 @@ export default async function handler(req, res) {
     const firstName = nameParts[0] || '';
     const lastName = nameParts.slice(1).join(' ') || '';
 
+    // Ad/campaign attribution (from UTM capture) + SMS consent → source, tags, note.
+    const attr = attribution && typeof attribution === 'object' ? attribution : {};
+    const attrLines = Object.entries(attr).filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`);
+    const leadSource = attr.utm_source ? `Careers Page — ${attr.utm_source}` : 'Careers Page';
+    const tags = ['Careers Applicant', role, smsConsent ? 'SMS Consent' : null].filter(Boolean);
+
     // 1. Create (or find existing) contact — tagged as an applicant, not a lead.
     const contactRes = await fetch('https://services.leadconnectorhq.com/contacts/', {
         method: 'POST',
@@ -59,8 +65,8 @@ export default async function handler(req, res) {
             phone: toE164(phone),
             email: email.trim(),
             locationId,
-            source: 'Careers Page',
-            tags: ['Careers Applicant', role].filter(Boolean),
+            source: leadSource,
+            tags,
         }),
     });
 
@@ -86,7 +92,9 @@ export default async function handler(req, res) {
             workAuth && `Authorized to work in US: ${workAuth}`,
             availability && `Availability: ${availability}`,
             resumeLink && `Resume / Portfolio: ${resumeLink}`,
+            `SMS Consent: ${smsConsent ? 'Yes' : 'No'}`,
             about && `\nAbout:\n${about}`,
+            attrLines.length ? `\nLead Source:\n${attrLines.join('\n')}` : '',
         ].filter(Boolean).join('\n');
 
         const tasks = [
@@ -110,6 +118,7 @@ export default async function handler(req, res) {
                         pipelineId,
                         pipelineStageId,
                         status: 'open',
+                        source: leadSource,
                     }),
                 }),
             );

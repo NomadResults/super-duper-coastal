@@ -4,6 +4,11 @@ import { BrowserRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import App from './App.jsx'
 import './index.css'
+import { captureAttribution, initMetaPixel } from './lib/tracking'
+
+// Snapshot ad/campaign attribution and load the Meta Pixel (if configured) before render.
+captureAttribution()
+initMetaPixel()
 
 const container = document.getElementById('root')
 const app = (

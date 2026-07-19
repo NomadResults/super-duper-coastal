@@ -34,6 +34,7 @@ export const ROLES = [
         title: 'Landscape & Hardscape Crew Member',
         type: 'Full-Time',
         location: 'Corpus Christi & Coastal Bend, TX',
+        pay: '$00–$00/hr DOE', // TODO: replace with your real range, e.g. "$16–$22/hr DOE"
         open: true,
         summary:
             'Hands-on installation of stone patios, retaining walls, plantings, turf, and outdoor living features on residential design-build projects.',
@@ -56,6 +57,7 @@ export const ROLES = [
         title: 'Crew Leader / Foreman',
         type: 'Full-Time',
         location: 'Corpus Christi & Coastal Bend, TX',
+        pay: '$00–$00/hr DOE', // TODO: replace with your real range, e.g. "$25–$32/hr DOE"
         open: true,
         summary:
             'Lead a crew day-to-day on hardscape and landscape installs — own the quality, pace, and safety of the jobsite from start to finish.',
@@ -83,3 +85,34 @@ export const GENERAL_APPLICATION = {
     summary:
         "We're always looking for hardworking, reliable people who take pride in their craft. Tell us what you do and we'll reach out when there's a fit.",
 };
+
+// ─────────────────────────────────────────────────────────────
+// TRUST / LEGITIMACY CONTENT — fill these in with real specifics.
+// Concrete, verifiable facts are what make a stranger trust you
+// enough to apply (and show up).
+// ─────────────────────────────────────────────────────────────
+
+// Short proof bar shown near the top of the page.
+// TODO: edit to match reality — remove any you can't truthfully claim.
+export const PROOF_POINTS = [
+    'Licensed & Insured',
+    'Weekly Pay',
+    'Trucks & Tools Provided',
+    'Paid Training',
+    '10+ Years in the Coastal Bend', // TODO: use your real number
+];
+
+// The real person applicants can reach with questions. Big legitimacy signal.
+// TODO: replace with a real name + the number you want applicants texting.
+export const HIRING_CONTACT = {
+    name: 'REPLACE — Hiring Manager Name',
+    phone: '(361) 316-5251',
+    phoneHref: '+13613165251',
+};
+
+// Employee quotes. TODO: swap for real quotes + first names/roles.
+// Set to [] to hide the section entirely until you have real ones.
+export const TESTIMONIALS = [
+    // { quote: 'Best crew I\'ve worked with. Steady hours and they actually train you.', name: 'Marcos', role: 'Crew Leader, 3 yrs' },
+    // { quote: 'Started with no experience — now I run my own crew.', name: 'Devin', role: 'Foreman, 2 yrs' },
+];

@@ -247,6 +247,120 @@
     color: var(--accent);
 }
 
+.rolePay {
+    font-weight: 700 !important;
+    color: var(--accent) !important;
+}
+
+/* ── Proof bar ── */
+.proofBar {
+    background-color: var(--navy);
+    padding: 0.9rem 0;
+}
+
+.proofList {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 2rem;
+}
+
+.proofItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-on-navy);
+}
+
+.proofItem svg {
+    color: var(--accent-bright);
+    flex-shrink: 0;
+}
+
+/* ── Employee quotes ── */
+.testimonialSection {
+    background-color: var(--bg);
+}
+
+.testimonialGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.testimonialCard {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-bright);
+    background-color: var(--bg-elevated);
+    padding: 1.5rem 1.75rem;
+}
+
+.testimonialQuote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.testimonialWho {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.testimonialWho strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* ── Hiring contact line ── */
+.hiringContact {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin: 0.75rem auto 0;
+}
+
+.hiringContact svg { color: var(--accent); }
+
+.hiringContact a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+}
+
+/* ── SMS consent ── */
+.consentRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.consentRow input {
+    margin-top: 0.15rem;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
 .roleApplyBtn {
     display: inline-flex;
     align-items: center;

@@ -103,6 +103,7 @@ function App() {
                 <Route path="/portfolio" element={<Navigate to="/services" replace />} />
                 <Route path="/portfolio/:slug" element={<PortfolioRedirect />} />
                 <Route path="/careers" element={<Careers />} />
+                <Route path="/jobs" element={<Navigate to="/careers" replace />} />
             </Routes>
             <Footer />
             <Analytics />

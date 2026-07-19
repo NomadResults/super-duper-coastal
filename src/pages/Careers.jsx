@@ -1,13 +1,17 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    ArrowRight, Send, CheckCircle, MapPin, Clock,
+    ArrowRight, Send, CheckCircle, MapPin, Clock, DollarSign, ShieldCheck, MessageSquare,
     CalendarCheck, TrendingUp, Award, HandHeart,
 } from 'lucide-react';
 import Seo from '../components/Seo';
 import { formatUSPhone, validateLead } from '../lib/leadValidation';
+import { getAttribution, trackPixel } from '../lib/tracking';
 import { CATEGORIES } from '../data/portfolioData';
-import { WHY_WORK_HERE, ROLES, GENERAL_APPLICATION } from '../data/careersData';
+import {
+    WHY_WORK_HERE, ROLES, GENERAL_APPLICATION,
+    PROOF_POINTS, HIRING_CONTACT, TESTIMONIALS,
+} from '../data/careersData';
 import styles from './Careers.module.css';
 
 const ICONS = { CalendarCheck, TrendingUp, Award, HandHeart };
@@ -19,7 +23,8 @@ const cultureImages = ['hardscaping', 'landscaping', 'outdoor-kitchens']
 const EMPTY = {
     name: '', phone: '', email: '', role: '', experience: '',
     license: '', transportation: '', workAuth: '', availability: '',
-    resumeLink: '', about: '', company: '', // company = honeypot
+    resumeLink: '', about: '', smsConsent: false,
+    hpField: '', // hpField = honeypot (non-semantic name so browsers don't autofill it)
 };
 
 const openRoles = ROLES.filter((r) => r.open);
@@ -33,8 +38,9 @@ export default function Careers() {
     const formRef = useRef(null);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setForm({ ...form, [name]: name === 'phone' ? formatUSPhone(value) : value });
+        const { name, value, type, checked } = e.target;
+        const next = type === 'checkbox' ? checked : (name === 'phone' ? formatUSPhone(value) : value);
+        setForm({ ...form, [name]: next });
         if (errors[name]) setErrors({ ...errors, [name]: undefined });
     };
 
@@ -64,10 +70,11 @@ export default function Careers() {
             const res = await fetch('/api/apply', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(form),
+                body: JSON.stringify({ ...form, attribution: getAttribution() }),
             });
             if (!res.ok) throw new Error('Failed');
             setSuccess(true);
+            trackPixel('SubmitApplication', { content_name: form.role || 'General Application' });
         } catch {
             setSubmitError(true);
         } finally {
@@ -116,6 +123,21 @@ export default function Careers() {
 
             <div className={styles.goldRule} />
 
+            {/* Proof bar — quick legitimacy signals */}
+            {PROOF_POINTS.length > 0 && (
+                <section className={styles.proofBar}>
+                    <div className="container">
+                        <ul className={styles.proofList}>
+                            {PROOF_POINTS.map((p) => (
+                                <li key={p} className={styles.proofItem}>
+                                    <ShieldCheck size={14} strokeWidth={2} /> {p}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </section>
+            )}
+
             {/* Why work here */}
             <section className={`section ${styles.whySection}`}>
                 <div className="container">
@@ -156,6 +178,28 @@ export default function Careers() {
                 </section>
             )}
 
+            {/* Employee quotes (hidden until real ones are added in careersData.js) */}
+            {TESTIMONIALS.length > 0 && (
+                <section className={`section ${styles.testimonialSection}`}>
+                    <div className="container">
+                        <div className={styles.sectionHeader}>
+                            <span className={styles.eyebrow}>From the Crew</span>
+                            <h2 className={styles.sectionTitle}>What our team says</h2>
+                        </div>
+                        <div className={styles.testimonialGrid}>
+                            {TESTIMONIALS.map((t) => (
+                                <figure key={t.name + t.role} className={styles.testimonialCard}>
+                                    <blockquote className={styles.testimonialQuote}>“{t.quote}”</blockquote>
+                                    <figcaption className={styles.testimonialWho}>
+                                        <strong>{t.name}</strong> — {t.role}
+                                    </figcaption>
+                                </figure>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
+
             {/* Open roles */}
             <section className={`section ${styles.rolesSection}`}>
                 <div className="container">
@@ -180,6 +224,11 @@ export default function Careers() {
                                         <div className={styles.roleMeta}>
                                             <span><Clock size={12} strokeWidth={2} /> {role.type}</span>
                                             <span><MapPin size={12} strokeWidth={2} /> {role.location}</span>
+                                            {role.pay && !role.pay.includes('$00') && (
+                                                <span className={styles.rolePay}>
+                                                    <DollarSign size={12} strokeWidth={2} /> {role.pay}
+                                                </span>
+                                            )}
                                         </div>
                                     </div>
                                     <button className={styles.roleApplyBtn} onClick={() => applyFor(role.title)}>
@@ -231,6 +280,13 @@ export default function Careers() {
                         <p className={styles.applySub}>
                             Takes about two minutes. A resume is optional — we care most about reliability and craft.
                         </p>
+                        {HIRING_CONTACT?.phone && (
+                            <p className={styles.hiringContact}>
+                                <MessageSquare size={13} strokeWidth={2} />
+                                Questions? Text {HIRING_CONTACT.name && !/^REPLACE/i.test(HIRING_CONTACT.name) ? `${HIRING_CONTACT.name} ` : ''}
+                                <a href={`sms:${HIRING_CONTACT.phoneHref || ''}`}>{HIRING_CONTACT.phone}</a>
+                            </p>
+                        )}
                     </div>
 
                     <div className={styles.formBox}>
@@ -250,10 +306,10 @@ export default function Careers() {
                             </motion.div>
                         ) : (
                             <form onSubmit={handleSubmit} className={styles.form}>
-                                {/* Honeypot */}
+                                {/* Honeypot — hidden, non-semantic name so autofill/password managers leave it blank */}
                                 <input
-                                    type="text" name="company" tabIndex={-1} autoComplete="off"
-                                    className={styles.honeypot} value={form.company} onChange={handleChange}
+                                    type="text" name="hpField" tabIndex={-1} autoComplete="off"
+                                    className={styles.honeypot} value={form.hpField} onChange={handleChange}
                                     aria-hidden="true"
                                 />
 
@@ -376,6 +432,15 @@ export default function Careers() {
                                         <a href="tel:+13613165251">(361) 316-5251</a>.
                                     </p>
                                 )}
+
+                                <label className={styles.consentRow}>
+                                    <input type="checkbox" name="smsConsent"
+                                        checked={form.smsConsent} onChange={handleChange} />
+                                    <span>
+                                        I agree to receive text messages from Coast to Coast Landscape &amp; Design
+                                        about my application. Msg &amp; data rates may apply. Reply STOP to opt out.
+                                    </span>
+                                </label>
 
                                 <p className={styles.eeoLine}>
                                     Coast to Coast Landscape &amp; Design is an equal opportunity employer.
