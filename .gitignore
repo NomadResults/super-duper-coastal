@@ -31,3 +31,7 @@ dist-ssr
 .vercel
 .playwright-mcp/
 .env*
+
+# Agent tool configs / local machine settings (keep the shared skill, drop personal state)
+opencode.json
+.claude/settings.local.json
