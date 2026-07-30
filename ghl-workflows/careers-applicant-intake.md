@@ -1,26 +1,53 @@
-# Careers — Applicant Intake (BUILT, IN DRAFT)
+# Careers — Applicant Intake (PUBLISHED / LIVE)
 
-> **Status: built 2026-07-30, sitting in DRAFT.** Workflow id
-> `4ea10c58-1e8a-430c-81e5-3c8eea27a75b`. Everything below is now a record of what exists,
-> not a plan — except the test steps at the bottom, which have **not** been run.
->
-> **A draft workflow does nothing.** Until someone flips it to Publish, applicants still get
-> silence. Test first (see bottom), then publish.
+> **Status: PUBLISHED and tested end-to-end 2026-07-30.** Workflow id
+> `4ea10c58-1e8a-430c-81e5-3c8eea27a75b`. This is a record of what exists and what was
+> verified, not a plan.
 
-**Built structure** (verified in the builder):
+**Live structure** (re-read from the builder after a full reload):
 
 ```
 Opportunity Created  [filter: In pipeline is "Hiring"]
   └─ Applicant Confirmation Email        (to the applicant)
-     └─ Notify Hiring Manager            (internal email → Assigned owners)
-        └─ SMS Consent?                  (If/Else on tag)
-           ├─ Consented  → Applicant Confirmation SMS
-           └─ None       → end
+     └─ Notify Hiring Manager            (internal EMAIL → Assigned owners)
+        └─ Text Hiring Manager           (internal SMS  → Assigned owners)
+           └─ SMS Consent?               (If/Else on tag "sms consent")
+              ├─ Consented  → Applicant Confirmation SMS
+              └─ None       → end
 ```
 
-Note the notification sits on the **trunk**, above the If/Else — during the build it first
-landed inside the Consented branch, which would have meant the hiring manager was only told
-about applicants who happened to opt into SMS. Worth re-checking after any future edit.
+Both internal notifications sit on the **trunk**, above the If/Else, so the hiring manager
+hears about *every* applicant regardless of whether they opted into SMS. During the build the
+email notification first landed *inside* the Consented branch — re-check trunk placement after
+any future edit.
+
+## Verified by live test 2026-07-30
+
+Two real submissions through production, records deleted afterwards.
+
+| Check | Result |
+|---|---|
+| Workflow fires on submission | ✅ all steps `Executed` |
+| Applicant email merge tags | ✅ `first_name`, `applicant_position`, `applicant_experience`, `applicant_availability` all rendered |
+| Consented applicant → SMS | ✅ sent |
+| **Non-consented applicant → NO SMS** | ✅ took the `None` branch, email only |
+| Internal email + SMS to hiring manager | ✅ both `Executed` on both runs |
+
+**Not verified:** the rendered *content* of the two internal messages. They go to the hiring
+manager's inbox and phone, which the execution log doesn't expose. The 8 tags unique to those
+messages (`last_name`, `phone`, `email`, `applicant_drivers_license`,
+`applicant_transportation`, `applicant_work_authorization`, `applicant_resume_link`,
+`applicant_about`) are still unconfirmed — ask her to eyeball one.
+
+## ⚠️ Two saves, and the action-level one is a lie
+
+"Save action" only commits to the local canvas. The header **"Save workflow"** button is what
+persists. Navigate away with only the action saved and the step is **silently discarded** —
+the canvas keeps showing it right up until you reload.
+
+This cost a full test cycle here: `Text Hiring Manager` looked present, then simply wasn't in
+the executed run. After any edit, reload the page, re-read the tree, and confirm the header
+button reads "Saved" (disabled) rather than "Save".
 
 Location `PLx0none5wN20wsNi0Gz` · Hiring pipeline `wy3QYFAE7xl12zv9pac0`
 Builder URL pattern: `/v2/location/<loc>/automation/workflow/<id>` — **`workflow` singular**.
