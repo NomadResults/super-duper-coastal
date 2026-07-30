@@ -5,6 +5,7 @@ import {
     CalendarCheck, TrendingUp, Award, HandHeart,
 } from 'lucide-react';
 import Seo from '../components/Seo';
+import JsonLd from '../components/JsonLd';
 import { formatUSPhone, validateLead } from '../lib/leadValidation';
 import { getAttribution, trackPixel } from '../lib/tracking';
 import { CATEGORIES } from '../data/portfolioData';
@@ -15,6 +16,67 @@ import {
 import styles from './Careers.module.css';
 
 const ICONS = { CalendarCheck, TrendingUp, Award, HandHeart };
+
+const SITE_URL = 'https://www.coast2coastlandscapes.com';
+
+const EMPLOYMENT_TYPE = { 'Full-Time': 'FULL_TIME', 'Part-Time': 'PART_TIME', Seasonal: 'TEMPORARY' };
+
+// Cities we actually staff jobsites in — mirrors the business schema's areaServed.
+const JOB_LOCALITIES = ['Corpus Christi', 'Rockport', 'Port Aransas', 'Portland', 'Ingleside'];
+
+/** Display pay range, or null when a role has no confirmed numbers (hides the line). */
+function payRange(role) {
+    if (!role.payMin || !role.payMax) return null;
+    return `$${role.payMin}–$${role.payMax}/hr DOE`;
+}
+
+/**
+ * Google for Jobs ingests JobPosting structured data — it's the main free
+ * applicant channel for a trade role. `baseSalary` is included only when the
+ * role has confirmed numbers: Google rejects listings with fabricated or
+ * placeholder compensation, so a wrong number is worse than none.
+ */
+function jobPostingSchema(role) {
+    const requirements = role.requirements.map((r) => `<li>${r}</li>`).join('');
+    const responsibilities = role.responsibilities.map((r) => `<li>${r}</li>`).join('');
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'JobPosting',
+        title: role.title,
+        identifier: { '@type': 'PropertyValue', name: 'Coast to Coast Landscape & Design', value: role.slug },
+        description:
+            `<p>${role.summary}</p>`
+            + `<p><strong>What you'll do</strong></p><ul>${responsibilities}</ul>`
+            + `<p><strong>What we're looking for</strong></p><ul>${requirements}</ul>`,
+        datePosted: role.datePosted,
+        employmentType: EMPLOYMENT_TYPE[role.type] || 'FULL_TIME',
+        hiringOrganization: { '@id': `${SITE_URL}/#business` },
+        jobLocation: JOB_LOCALITIES.map((city) => ({
+            '@type': 'Place',
+            address: {
+                '@type': 'PostalAddress',
+                addressLocality: city,
+                addressRegion: 'TX',
+                addressCountry: 'US',
+            },
+        })),
+        applicantLocationRequirements: { '@type': 'Country', name: 'US' },
+        directApply: true,
+        url: `${SITE_URL}/careers`,
+        ...(payRange(role) && {
+            baseSalary: {
+                '@type': 'MonetaryAmount',
+                currency: 'USD',
+                value: {
+                    '@type': 'QuantitativeValue',
+                    minValue: role.payMin,
+                    maxValue: role.payMax,
+                    unitText: 'HOUR',
+                },
+            },
+        }),
+    };
+}
 
 const cultureImages = ['hardscaping', 'landscaping', 'outdoor-kitchens']
     .map((slug) => CATEGORIES.find((c) => c.slug === slug)?.cover)
@@ -96,6 +158,11 @@ export default function Careers() {
                 description="Now hiring landscape & hardscape crew members and crew leaders across Corpus Christi and the Coastal Bend. Year-round work, real growth, and craftsmanship you can be proud of. Apply today."
                 path="/careers"
             />
+
+            {/* One JobPosting block per open role — Google for Jobs eligibility */}
+            {openRoles.map((role) => (
+                <JsonLd key={`schema-${role.slug}`} data={jobPostingSchema(role)} />
+            ))}
 
             {/* Hero */}
             <section className={styles.hero}>
@@ -224,9 +291,9 @@ export default function Careers() {
                                         <div className={styles.roleMeta}>
                                             <span><Clock size={12} strokeWidth={2} /> {role.type}</span>
                                             <span><MapPin size={12} strokeWidth={2} /> {role.location}</span>
-                                            {role.pay && !role.pay.includes('$00') && (
+                                            {payRange(role) && (
                                                 <span className={styles.rolePay}>
-                                                    <DollarSign size={12} strokeWidth={2} /> {role.pay}
+                                                    <DollarSign size={12} strokeWidth={2} /> {payRange(role)}
                                                 </span>
                                             )}
                                         </div>
@@ -283,7 +350,7 @@ export default function Careers() {
                         {HIRING_CONTACT?.phone && (
                             <p className={styles.hiringContact}>
                                 <MessageSquare size={13} strokeWidth={2} />
-                                Questions? Text {HIRING_CONTACT.name && !/^REPLACE/i.test(HIRING_CONTACT.name) ? `${HIRING_CONTACT.name} ` : ''}
+                                Questions? Text {HIRING_CONTACT.name ? `${HIRING_CONTACT.name} ` : ''}
                                 <a href={`sms:${HIRING_CONTACT.phoneHref || ''}`}>{HIRING_CONTACT.phone}</a>
                             </p>
                         )}

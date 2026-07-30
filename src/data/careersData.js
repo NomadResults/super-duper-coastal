@@ -28,13 +28,27 @@ export const WHY_WORK_HERE = [
 ];
 
 // type: 'Full-Time' | 'Seasonal' | 'Part-Time'
+//
+// `datePosted` (YYYY-MM-DD) feeds the JobPosting structured data that Google for
+// Jobs reads. Keep it truthful — bump it when you genuinely re-open or refresh a
+// role, not on every deploy. Roles are treated as evergreen (no expiry date),
+// which is why there's no `validThrough`.
+//
+// `payMin` / `payMax` are hourly USD and are the single source for BOTH the pay
+// line on the page and `baseSalary` in the JobPosting schema — don't hardcode a
+// pay string anywhere else or the two will drift. Set either to null to hide pay
+// entirely (the page omits the line, the schema omits baseSalary) rather than
+// publishing a number you can't stand behind.
+// Ranges confirmed by the owner 2026-07-30, split from his stated $18–$32 band.
 export const ROLES = [
     {
         slug: 'crew-member',
         title: 'Landscape & Hardscape Crew Member',
         type: 'Full-Time',
         location: 'Corpus Christi & Coastal Bend, TX',
-        pay: '$00–$00/hr DOE', // TODO: replace with your real range, e.g. "$16–$22/hr DOE"
+        payMin: 18,
+        payMax: 24,
+        datePosted: '2026-07-19',
         open: true,
         summary:
             'Hands-on installation of stone patios, retaining walls, plantings, turf, and outdoor living features on residential design-build projects.',
@@ -57,7 +71,9 @@ export const ROLES = [
         title: 'Crew Leader / Foreman',
         type: 'Full-Time',
         location: 'Corpus Christi & Coastal Bend, TX',
-        pay: '$00–$00/hr DOE', // TODO: replace with your real range, e.g. "$25–$32/hr DOE"
+        payMin: 24,
+        payMax: 32,
+        datePosted: '2026-07-19',
         open: true,
         summary:
             'Lead a crew day-to-day on hardscape and landscape installs — own the quality, pace, and safety of the jobsite from start to finish.',
@@ -93,19 +109,26 @@ export const GENERAL_APPLICATION = {
 // ─────────────────────────────────────────────────────────────
 
 // Short proof bar shown near the top of the page.
-// TODO: edit to match reality — remove any you can't truthfully claim.
+// All five confirmed by the owner 2026-07-29. Do not add a claim here without
+// checking it first — this bar is the page's credibility, and applicants who
+// find out a promise was inflated don't come back.
+//
+// Deliberately NOT claimed: trucks (not provided yet — crew supply their own
+// transportation), and training is provided but UNPAID, so it can't be called
+// "Paid Training".
 export const PROOF_POINTS = [
     'Licensed & Insured',
     'Weekly Pay',
-    'Trucks & Tools Provided',
-    'Paid Training',
-    '10+ Years in the Coastal Bend', // TODO: use your real number
+    'Tools Provided',
+    'Training Provided',
+    '3+ Years in the Coastal Bend',
 ];
 
-// The real person applicants can reach with questions. Big legitimacy signal.
-// TODO: replace with a real name + the number you want applicants texting.
+// Number applicants can text with questions. Intentionally no name attached —
+// applicants are told "someone from the team" will reach out rather than being
+// pointed at a specific person.
 export const HIRING_CONTACT = {
-    name: 'REPLACE — Hiring Manager Name',
+    name: null,
     phone: '(361) 316-5251',
     phoneHref: '+13613165251',
 };
