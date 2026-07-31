@@ -26,7 +26,7 @@ const GHL_BASE = 'https://services.leadconnectorhq.com';
 const DEFAULT_ASSIGNEE_ID = 'tH7GJTcsclCRSaMdhbWg';
 
 // GHL custom fields MUST be written by `id`, not `key` — writing by key
-// returns 200 and persists nothing. See ghl-workflows/ notes.
+// returns 200 and persists nothing. See the coast2coast-ops repo, workflows/ notes.
 const FIELD = {
     position: 'OXCyjb9T6dFAc8YWRjP7',
     experience: 'AiJyByb358B2nZ3c5hSq',
