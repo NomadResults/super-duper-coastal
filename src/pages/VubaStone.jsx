@@ -116,7 +116,7 @@ export default function VubaStone() {
                 title="Certified Vuba Stone Installer in Corpus Christi, TX | Coast to Coast Landscape & Design"
                 description="Resin-bound Vuba Stone surfacing for pool decks, driveways, walkways, and patios — permeable, UV-stable, and seamless. Certified installation across Corpus Christi and the Coastal Bend."
                 path="/vuba-stone"
-                image={photos[0]?.img}
+                image="/vuba/og-vuba-stone.jpg"
             />
             <JsonLd
                 data={{

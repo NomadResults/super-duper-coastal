@@ -46,12 +46,16 @@ export const CATEGORIES = [
     {
         slug: 'vuba-stone',
         label: 'Vuba Stone',
-        // TODO: replace cover with a real Vuba job photo once uploaded to the CDN;
-        // temporary stand-in so the home services card has an image.
-        cover: cdn('https://assets.cdn.filesafe.space/PLx0none5wN20wsNi0Gz/media/69f8ddee273a62411d7daad8.jpeg'),
-        // Add completed Vuba installs here as { img: cdn('...'), title: '...' } —
-        // the gallery on /vuba-stone renders automatically once photos exist.
-        photos: [],
+        // Vuba job photos are served from public/vuba/ rather than the GHL CDN,
+        // so they ship with the deploy — plain site-relative paths, no cdn() wrapper.
+        cover: '/vuba/pool-deck-covered-patio.webp',
+        photos: [
+            { img: '/vuba/pool-deck-covered-patio.webp', title: 'Resin-Bound Pool Deck & Covered Patio' },
+            { img: '/vuba/patio-wide.webp', title: 'Backyard Patio Surround' },
+            { img: '/vuba/aggregate-texture.webp', title: 'Resin-Bound Aggregate Texture' },
+            { img: '/vuba/side-walkway.webp', title: 'Side-Yard Walkway' },
+            { img: '/vuba/outdoor-kitchen-floor.webp', title: 'Outdoor Kitchen Flooring' },
+        ],
     },
     {
         slug: 'lighting',
